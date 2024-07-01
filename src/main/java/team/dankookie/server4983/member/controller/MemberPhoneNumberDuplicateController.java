@@ -18,7 +18,7 @@ public class MemberPhoneNumberDuplicateController {
     private final MemberService memberService;
 
     @GetMapping("/phoneNumber/duplicate")
-    public ResponseEntity<PhoneNumberDuplicateResponse> checkPhoneNumberDuplicate(@RequestParam String phoneNumber, AccessToken accessToken){
+    public ResponseEntity<PhoneNumberDuplicateResponse> checkPhoneNumberDuplicate(@RequestParam String phoneNumber, AccessToken accessToken) {
         boolean isDuplicate = memberService.checkPhoneNumberDuplicate(phoneNumber, accessToken.nickname());
 
         return ResponseEntity.ok(PhoneNumberDuplicateResponse.of(isDuplicate));

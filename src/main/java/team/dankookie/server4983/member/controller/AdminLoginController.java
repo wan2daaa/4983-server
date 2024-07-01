@@ -25,40 +25,41 @@ import team.dankookie.server4983.member.service.AdminMemberService;
 @RequestMapping("/api/v1/admin/login")
 public class AdminLoginController {
 
-  private final AdminMemberService adminMemberService;
-  private final JwtTokenUtils jwtTokenUtils;
-  private final RefreshTokenService refreshTokenService;
+    private final AdminMemberService adminMemberService;
+    private final JwtTokenUtils jwtTokenUtils;
+    private final RefreshTokenService refreshTokenService;
 
-  @PostMapping
-  public ResponseEntity<Void> login(@RequestBody AdminLoginRequest request, HttpServletResponse response) {
-    adminMemberService.login(request);
+    @PostMapping
+    public ResponseEntity<Void> login(@RequestBody AdminLoginRequest request, HttpServletResponse response) {
+        adminMemberService.login(request);
 
-    Member member = adminMemberService.findMemberNicknameById(request.id());
+        Member member = adminMemberService.findMemberNicknameById(request.id());
 
-    setAccessTokenToHeader(response, member);
-    setRefreshTokenToCookie(response, member);
+        setAccessTokenToHeader(response, member);
+        setRefreshTokenToCookie(response, member);
 
-    return ResponseEntity.ok().build();
-  }
-  private void setAccessTokenToHeader(HttpServletResponse response, Member member) {
-    String accessToken = jwtTokenUtils.generateJwtToken(member.getNickname(), ACCESS_TOKEN_DURATION.getDuration());
-    response.setHeader(HttpHeaders.AUTHORIZATION, accessToken);
-  }
+        return ResponseEntity.ok().build();
+    }
 
-  private void setRefreshTokenToCookie(HttpServletResponse response, Member member) {
-    String refreshToken = jwtTokenUtils.generateJwtToken(member.getNickname(), REFRESH_TOKEN_DURATION.getDuration());
-    refreshTokenService.save(
-        member,
-        RefreshToken.builder()
-            .member(member)
-            .refreshToken(refreshToken)
-            .build()
-    );
-    Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
-    refreshTokenCookie.setHttpOnly(true);
-    refreshTokenCookie.setPath("/");
-    refreshTokenCookie.setMaxAge((int) REFRESH_TOKEN_DURATION.getDuration() / 1000);
-    response.addCookie(refreshTokenCookie);
-  }
+    private void setAccessTokenToHeader(HttpServletResponse response, Member member) {
+        String accessToken = jwtTokenUtils.generateJwtToken(member.getNickname(), ACCESS_TOKEN_DURATION.getDuration());
+        response.setHeader(HttpHeaders.AUTHORIZATION, accessToken);
+    }
+
+    private void setRefreshTokenToCookie(HttpServletResponse response, Member member) {
+        String refreshToken = jwtTokenUtils.generateJwtToken(member.getNickname(), REFRESH_TOKEN_DURATION.getDuration());
+        refreshTokenService.save(
+                member,
+                RefreshToken.builder()
+                        .member(member)
+                        .refreshToken(refreshToken)
+                        .build()
+        );
+        Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
+        refreshTokenCookie.setHttpOnly(true);
+        refreshTokenCookie.setPath("/");
+        refreshTokenCookie.setMaxAge((int) REFRESH_TOKEN_DURATION.getDuration() / 1000);
+        response.addCookie(refreshTokenCookie);
+    }
 
 }

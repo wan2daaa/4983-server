@@ -24,7 +24,7 @@ public class MemberPasswordController {
         memberService.isMemberExistsByMemberPasswordRequest(studentId, phoneNumber);
 
         SmsCertificationNumber certificationNumber = smsService.sendCertificationNumberToPhoneNumber(
-            phoneNumber);
+                phoneNumber);
         return ResponseEntity.ok(certificationNumber);
     }
 

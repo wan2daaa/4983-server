@@ -24,9 +24,9 @@ public class ChatBotInteract {
 
     public String purchaseBookStart(ChatRoom chatRoom) {
         String sellerMessage = String.format("'%s' 님이 거래 요청을 보냈어요! \n" +
-                                             "오늘 거래하러 갈래요?", chatRoom.getSeller().getNickname());
+                "오늘 거래하러 갈래요?", chatRoom.getSeller().getNickname());
         String buyerMessage = String.format("'%s' 님께 '%s' 서적 거래를 요청했습니다. \n\n" +
-                                            " 판매자의 응답을 기다려주세요. :)", chatRoom.getSeller().getNickname(), chatRoom.getUsedBook().getName());
+                " 판매자의 응답을 기다려주세요. :)", chatRoom.getSeller().getNickname(), chatRoom.getUsedBook().getName());
 
         SellerChat sellerChat = SellerChat.buildSellerChat(sellerMessage, BOOK_PURCHASE_START_SELLER, chatRoom);
         BuyerChat buyerChat = BuyerChat.buildBuyerChat(buyerMessage, BOOK_PURCHASE_START_BUYER, chatRoom);
@@ -63,7 +63,7 @@ public class ChatBotInteract {
                 "메일) 4983service@gmail.com\n" +
                 "\n");
 
-        SellerChat sellerChat = SellerChat.buildSellerChat(sellerMessage , BOOK_PURCHASE_START_NOTIFY_SELLER, chatRoom);
+        SellerChat sellerChat = SellerChat.buildSellerChat(sellerMessage, BOOK_PURCHASE_START_NOTIFY_SELLER, chatRoom);
         BuyerChat buyerChat = BuyerChat.buildBuyerChat(buyerMessage, BOOK_PURCHASE_START_NOTIFY_BUYER, chatRoom);
         chatRoom.addSellerChat(sellerChat);
         chatRoom.addBuyerChat(buyerChat);

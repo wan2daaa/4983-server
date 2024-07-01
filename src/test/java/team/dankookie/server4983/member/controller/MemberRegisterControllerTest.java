@@ -23,16 +23,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class MemberRegisterControllerTest extends BaseControllerTest {
 
-    @MockBean
-    private MemberService memberService;
-
     @Test
     void 학번이_중복이_아니면_200을_리턴한다() throws Exception {
         //given
         final String studentId = "202023604";
 
         when(memberService.isStudentIdDuplicate(studentId))
-            .thenReturn(false);
+                .thenReturn(false);
         //when
         ResultActions resultActions = mockMvc.perform(get(API + "/register/duplicate/studentId")
                         .param("studentId", studentId))
@@ -70,6 +67,7 @@ class MemberRegisterControllerTest extends BaseControllerTest {
                         )
                 ));
     }
+
     @Test
     void 닉네임이_중복이_아니면_200과_메시지를_리턴한다() throws Exception {
         //given
@@ -162,5 +160,5 @@ class MemberRegisterControllerTest extends BaseControllerTest {
                         )
                 ));
     }
-    
+
 }

@@ -17,26 +17,26 @@ import team.dankookie.server4983.member.service.MemberService;
 @RequestMapping("/api/v1/my-pages/member")
 public class MemberMyPageController {
 
-  private final MemberService memberService;
+    private final MemberService memberService;
 
-  @GetMapping
-  public ResponseEntity<MemberMyPageResponse> getMemberInfo(AccessToken accessToken) {
-    MemberMyPageResponse response = memberService.getMyPageMemberInfo(
-        accessToken.nickname());
-    return ResponseEntity.ok(response);
-  }
+    @GetMapping
+    public ResponseEntity<MemberMyPageResponse> getMemberInfo(AccessToken accessToken) {
+        MemberMyPageResponse response = memberService.getMyPageMemberInfo(
+                accessToken.nickname());
+        return ResponseEntity.ok(response);
+    }
 
-  @PostMapping("/password")
-  public ResponseEntity<MemberPasswordMatchResponse> checkPasswordMatch(@RequestBody String password, HttpServletRequest request){
-    boolean isPasswordMatch = memberService.isMemberPasswordMatch(password, request.getHeader(HttpHeaders.AUTHORIZATION));
-    return ResponseEntity.ok(MemberPasswordMatchResponse.of(isPasswordMatch));
-  }
+    @PostMapping("/password")
+    public ResponseEntity<MemberPasswordMatchResponse> checkPasswordMatch(@RequestBody String password, HttpServletRequest request) {
+        boolean isPasswordMatch = memberService.isMemberPasswordMatch(password, request.getHeader(HttpHeaders.AUTHORIZATION));
+        return ResponseEntity.ok(MemberPasswordMatchResponse.of(isPasswordMatch));
+    }
 
-  @GetMapping("/modify")
-  public ResponseEntity<MemberMyPageModifyResponse> getMemberModifyInfo(AccessToken accessToken){
-    MemberMyPageModifyResponse response = memberService.getMyPageMemberModifyInfo(
-            accessToken.nickname());
-    return ResponseEntity.ok(response);
-  }
+    @GetMapping("/modify")
+    public ResponseEntity<MemberMyPageModifyResponse> getMemberModifyInfo(AccessToken accessToken) {
+        MemberMyPageModifyResponse response = memberService.getMyPageMemberModifyInfo(
+                accessToken.nickname());
+        return ResponseEntity.ok(response);
+    }
 
 }

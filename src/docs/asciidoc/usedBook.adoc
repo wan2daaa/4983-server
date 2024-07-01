@@ -24,7 +24,6 @@ include::{snippets}/used-book-list/getUsedBookList/success/query-parameters.adoc
 include::{snippets}/used-book-list/getUsedBookList/success/http-response.adoc[]
 include::{snippets}/used-book-list/getUsedBookList/success/response-fields.adoc[]
 
-
 === 단과대 학과에 따라 서적 리스트 가져오기
 
 ==== Request
@@ -33,6 +32,7 @@ include::{snippets}/used-book-list/getUsedBookListWithCollegeAndDepartment/succe
 include::{snippets}/used-book-list/getUsedBookListWithCollegeAndDepartment/success/query-parameters.adoc[]
 
 ===== QueryParameter 예시
+
 api?college=ENGINEERING,EDUCATION&department=COMPUTER,SOFTWARE,KOREAN
 
 queryParameter::
@@ -45,6 +45,7 @@ include::{snippets}/used-book-list/getUsedBookListWithCollegeAndDepartment/succe
 
 
 ===== College Enum (앞의 영어만 보면됨)
+
     BUSINESS_AND_ECONOMICS("경영경제대학" ),
     SW_CONVERGENCE("SW융합대학"),
     SOCIAL_SCIENCES("사회과학대학"),
@@ -55,6 +56,7 @@ include::{snippets}/used-book-list/getUsedBookListWithCollegeAndDepartment/succe
     MUSIC_AND_ARTS("음악예술대학");
 
 ===== Department Enum (앞에 영어만 보면됨)
+
     BUSINESS("경영학과", BUSINESS_AND_ECONOMICS),
     ECONOMICS("경제학과", BUSINESS_AND_ECONOMICS),
     INTERNATIONAL_BUSINESS("국제경영학전공", BUSINESS_AND_ECONOMICS),
@@ -125,73 +127,93 @@ include::{snippets}/used-book-list/getUsedBookList/search/success/response-field
 === 마이페이지 판매내역 판매중인 책 리스트 가져오기(성공)
 
 ==== Request
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sales-on-book-list/http-request.adoc[]
 
 ==== query parameters
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sales-on-book-list/query-parameters.adoc[]
 
 ==== Request Header
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sales-on-book-list/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sales-on-book-list/http-response.adoc[]
 include::{snippets}/my-pages/book-sales-detail-list/success/sales-on-book-list/response-fields.adoc[]
 
 === 마이페이지 판매내역 판매중인 책이 없는경우 빈 리스트를 리턴한다
 
 ==== Request
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sales-on-book-list/empty/http-request.adoc[]
 
 ==== QueryParameter
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sales-on-book-list/empty/query-parameters.adoc[]
 
 ==== RequestHeader
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sales-on-book-list/empty/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sales-on-book-list/empty/http-response.adoc[]
 
 === 마이페이지 판매내역 거래완료한 책 리스트 가져오기
 
 ==== Request
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sold-out-book-list/http-request.adoc[]
 
 ==== QueryParameter
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sold-out-book-list/query-parameters.adoc[]
 
 ==== RequestHeader
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sold-out-book-list/request-headers.adoc[]
 
 ==== response
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sold-out-book-list/http-response.adoc[]
 include::{snippets}/my-pages/book-sales-detail-list/success/sold-out-book-list/response-fields.adoc[]
 
 === 마이페이지 판매내역 거래완료한 내역이 없는경우 빈리스트를 리턴
 
 ==== Request
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sold-out-book-list/empty/http-request.adoc[]
 
 ==== QueryParameter
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sold-out-book-list/empty/query-parameters.adoc[]
 
 ==== RequestHeader
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sold-out-book-list/empty/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/book-sales-detail-list/success/sold-out-book-list/empty/http-response.adoc[]
 
 === 마이페이지 판매내역 책 리스트 가져오기(회원이 존재하지 않는 경우)
 
 ==== Request
+
 include::{snippets}/my-pages/book-sales-detail-list/fail/http-request.adoc[]
 
 ==== query parameters
+
 include::{snippets}/my-pages/book-sales-detail-list/fail/query-parameters.adoc[]
 
 ==== Request Header
+
 include::{snippets}/my-pages/book-sales-detail-list/fail/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/book-sales-detail-list/fail/http-response.adoc[]
 include::{snippets}/my-pages/book-sales-detail-list/fail/response-fields.adoc[]
 
@@ -204,9 +226,11 @@ include::{snippets}/my-pages/book-sales-detail-list/fail/response-fields.adoc[]
 include::{snippets}/used-book/save/success/http-request.adoc[]
 include::{snippets}/used-book/save/success/request-parts.adoc[]
 ===== usedBook fields 요소  {usedBook : {}}
+
 include::{snippets}/used-book/save/success/request-part-usedBook-fields.adoc[]
 
 ===== RequestHeader
+
 include::{snippets}/used-book/save/success/request-headers.adoc[]
 
 ==== Response
@@ -224,7 +248,6 @@ include::{snippets}/used-book/detail/success/request-headers.adoc[]
 include::{snippets}/used-book/detail/success/http-request.adoc[]
 include::{snippets}/used-book/detail/success/path-parameters.adoc[]
 
-
 ==== Response
 
 include::{snippets}/used-book/detail/success/http-response.adoc[]
@@ -236,7 +259,9 @@ include::{snippets}/used-book/detail/success/response-fields.adoc[]
 
 include::{snippets}/used-book/delete/success/http-request.adoc[]
 include::{snippets}/used-book/delete/success/path-parameters.adoc[]
+
 ==== RequestHeader
+
 include::{snippets}/used-book/delete/success/request-headers.adoc[]
 
 ==== Response
@@ -249,7 +274,9 @@ include::{snippets}/used-book/delete/success/http-response.adoc[]
 
 include::{snippets}/used-book/image/delete/success/http-request.adoc[]
 include::{snippets}/used-book/image/delete/success/path-parameters.adoc[]
+
 ==== RequestHeader
+
 include::{snippets}/used-book/image/delete/success/request-headers.adoc[]
 
 ==== Response
@@ -263,9 +290,11 @@ include::{snippets}/used-book/image/delete/success/http-response.adoc[]
 include::{snippets}/used-book/update/success/http-request.adoc[]
 include::{snippets}/used-book/update/success/request-parts.adoc[]
 ===== usedBook fields 요소  {usedBook : {}}
+
 include::{snippets}/used-book/update/success/request-part-usedBook-fields.adoc[]
 
 ===== RequestHeader
+
 include::{snippets}/used-book/update/success/request-headers.adoc[]
 
 ==== Response
@@ -276,44 +305,56 @@ include::{snippets}/used-book/update/success/response-fields.adoc[]
 === 마이페이지 구매내역 책 리스트 가져오기(성공)
 
 ==== Request
+
 include::{snippets}/my-pages/book-purchase-detail-list/success/http-request.adoc[]
 include::{snippets}/my-pages/book-purchase-detail-list/success/request-body.adoc[]
 
 ===== QueryParameters
+
 include::{snippets}/my-pages/book-purchase-detail-list/success/query-parameters.adoc[]
 
 ==== RequestHeader
+
 include::{snippets}/my-pages/book-purchase-detail-list/success/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/book-purchase-detail-list/success/http-response.adoc[]
 include::{snippets}/my-pages/book-purchase-detail-list/success/response-fields.adoc[]
 
 === 마이페이지 구매내역이 없는 경우 빈 리스트를 리턴한다
 
 ==== Request
+
 include::{snippets}/my-pages/book-purchase-detail-list/empty/http-request.adoc[]
 
 ===== QueryParameter
+
 include::{snippets}/my-pages/book-purchase-detail-list/empty/query-parameters.adoc[]
 
 ==== RequestHeader
+
 include::{snippets}/my-pages/book-purchase-detail-list/empty/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/book-purchase-detail-list/empty/http-response.adoc[]
 
 === 마이페이지 구매내역 책 리스트 가져오기(회원이 존재하지 않는 경우)
 
 ==== Request
+
 include::{snippets}/my-pages/book-purchase-detail-list/fail/http-request.adoc[]
 
 ===== QueryParameter
+
 include::{snippets}/my-pages/book-purchase-detail-list/fail/query-parameters.adoc[]
 
 ==== RequestHeader
+
 include::{snippets}/my-pages/book-purchase-detail-list/fail/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/book-purchase-detail-list/fail/http-response.adoc[]
 include::{snippets}/my-pages/book-purchase-detail-list/fail/response-fields.adoc[]

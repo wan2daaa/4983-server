@@ -59,5 +59,4 @@ class UsedBookListServiceTest extends BaseServiceTest {
     }
 
 
-
 }

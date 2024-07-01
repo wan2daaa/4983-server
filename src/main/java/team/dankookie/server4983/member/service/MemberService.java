@@ -123,7 +123,7 @@ public class MemberService {
     }
 
     @Transactional
-    public boolean checkMemberAndWithdraw(AccessToken accessToken){
+    public boolean checkMemberAndWithdraw(AccessToken accessToken) {
         String nickname = jwtTokenUtils.getNickname(accessToken.value());
         Member member = findMemberByNickname(nickname);
         if (!member.getIsWithdraw()) {
@@ -143,13 +143,13 @@ public class MemberService {
         member.updateMemberProfile(memberProfileSaveRequest);
 
         if (multipartFile != null) {
-            String imageKey = member.getImageUrl().split(uploadService.s3Bucket)[1];
-            uploadService.deleteFile(imageKey);
-                S3Response s3Response = uploadService.saveFileWithUUID(multipartFile);
-                member.setImageUrl(s3Response.s3ImageUrl());
-            }
-        return MemberProfileSaveResponse.of(member.getId());
+//            String imageKey = member.getImageUrl().split(uploadService.s3Bucket)[1];
+//            uploadService.deleteFile(imageKey);
+            S3Response s3Response = uploadService.saveFileWithUUID(multipartFile);
+            member.setImageUrl(s3Response.s3ImageUrl());
         }
+        return MemberProfileSaveResponse.of(member.getId());
+    }
 
     public MemberMyPageResponse getMyPageMemberInfo(String nickname) {
         Member member = findMemberByNickname(nickname);

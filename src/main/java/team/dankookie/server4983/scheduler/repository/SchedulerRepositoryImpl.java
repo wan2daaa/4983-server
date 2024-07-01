@@ -34,24 +34,24 @@ public class SchedulerRepositoryImpl implements CustomSchedulerRepository {
     }
 
     @Override
-    public List<ChatRoom> findChatRoomPreviouslyTime(long time , int interactStep) {
+    public List<ChatRoom> findChatRoomPreviouslyTime(long time, int interactStep) {
         LocalDateTime start = LocalDateTime.now().minusMinutes(time);
         LocalDateTime end = LocalDateTime.now();
 
         return jpaQueryFactory.select(chatRoom).from(chatRoom)
-                .innerJoin(chatRoom.usedBook , usedBook)
+                .innerJoin(chatRoom.usedBook, usedBook)
                 .on(usedBook.tradeAvailableDatetime.goe(start).and(usedBook.tradeAvailableDatetime.loe(end)))
                 .where(chatRoom.interactStep.eq(interactStep))
                 .fetch();
     }
 
     @Override
-    public List<ChatRoom> findChatRoomAfterTime(long time , int interactStep) {
+    public List<ChatRoom> findChatRoomAfterTime(long time, int interactStep) {
         LocalDateTime start = LocalDateTime.now();
         LocalDateTime end = LocalDateTime.now().plusMinutes(time);
 
         return jpaQueryFactory.select(chatRoom).from(chatRoom)
-                .innerJoin(chatRoom.usedBook , usedBook)
+                .innerJoin(chatRoom.usedBook, usedBook)
                 .on(usedBook.tradeAvailableDatetime.goe(start).and(usedBook.tradeAvailableDatetime.loe(end)))
                 .where(chatRoom.interactStep.eq(interactStep))
                 .fetch();

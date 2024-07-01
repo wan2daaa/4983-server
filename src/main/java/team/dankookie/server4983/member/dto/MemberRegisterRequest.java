@@ -30,7 +30,7 @@ public record MemberRegisterRequest(
                                            String accountHolder,
                                            AccountBank accountBank,
                                            String accountNumber,
-                                             String firebaseToken
+                                           String firebaseToken
     ) {
         return new MemberRegisterRequest(
                 studentId,

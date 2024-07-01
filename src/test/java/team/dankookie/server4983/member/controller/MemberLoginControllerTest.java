@@ -27,11 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class MemberLoginControllerTest extends BaseControllerTest {
 
-    @MockBean
-    MemberService memberService;
-    @MockBean
-    RefreshTokenService refreshTokenService;
-
     @Test
     void 로그인시_accessToken과_refreshToken을_리턴한다() throws Exception {
         //given

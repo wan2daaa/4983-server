@@ -65,7 +65,7 @@ class UsedBookServiceTest extends BaseServiceTest {
                 College.LAW,
                 Department.BUSINESS,
                 15000,
-                LocalDateTime.of(2023, 9, 13,12,0),
+                LocalDateTime.of(2023, 9, 13, 12, 0),
                 "책이름",
                 "출판사",
                 false,
@@ -113,7 +113,7 @@ class UsedBookServiceTest extends BaseServiceTest {
                 .name(bookName)
                 .publisher(publisher)
                 .price(15000)
-                .tradeAvailableDatetime(LocalDateTime.of(2023, 9, 13,12,0))
+                .tradeAvailableDatetime(LocalDateTime.of(2023, 9, 13, 12, 0))
                 .build();
 
         when(usedBookRepository.findById(usedBookId))

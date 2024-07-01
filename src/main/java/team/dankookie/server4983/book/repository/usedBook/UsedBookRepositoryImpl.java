@@ -8,7 +8,9 @@ import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+
 import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -26,122 +28,122 @@ public class UsedBookRepositoryImpl implements UsedBookRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 
-  @Override
-  public Page<AdminUsedBookListResponse> getAdminUsedBookList(Pageable pageable,
-      String searchKeyword, BookStatus bookStatus) {
+    @Override
+    public Page<AdminUsedBookListResponse> getAdminUsedBookList(Pageable pageable,
+                                                                String searchKeyword, BookStatus bookStatus) {
 
-    if (bookStatus == BookStatus.ALL) {
-      List<AdminUsedBookListResponse> content = jpaQueryFactory
-          .select(
-              new QAdminUsedBookListResponse(
-                  usedBook.id,
-                  usedBook.bookStatus,
-                  usedBook.name,
-                  usedBook.publisher,
-                  usedBook.price,
-                  usedBook.createdAt
-              )
-          ).from(usedBook)
-          .where(
-              boolNameOrPublisherContains(searchKeyword)
-          ).orderBy(usedBook.id.desc())
-          .offset(pageable.getOffset())
-          .limit(12)
-          .fetch();
-      Long count = jpaQueryFactory
-          .select(usedBook.count())
-          .from(usedBook)
-          .where(
-              boolNameOrPublisherContains(searchKeyword)
-          ).fetchOne();
-      return new PageImpl<>(content, pageable, count);
+        if (bookStatus == BookStatus.ALL) {
+            List<AdminUsedBookListResponse> content = jpaQueryFactory
+                    .select(
+                            new QAdminUsedBookListResponse(
+                                    usedBook.id,
+                                    usedBook.bookStatus,
+                                    usedBook.name,
+                                    usedBook.publisher,
+                                    usedBook.price,
+                                    usedBook.createdAt
+                            )
+                    ).from(usedBook)
+                    .where(
+                            boolNameOrPublisherContains(searchKeyword)
+                    ).orderBy(usedBook.id.desc())
+                    .offset(pageable.getOffset())
+                    .limit(12)
+                    .fetch();
+            Long count = jpaQueryFactory
+                    .select(usedBook.count())
+                    .from(usedBook)
+                    .where(
+                            boolNameOrPublisherContains(searchKeyword)
+                    ).fetchOne();
+            return new PageImpl<>(content, pageable, count);
+        }
+
+        if (bookStatus == BookStatus.DELETE) {
+            List<AdminUsedBookListResponse> content = jpaQueryFactory
+                    .select(
+                            new QAdminUsedBookListResponse(
+                                    usedBook.id,
+                                    usedBook.bookStatus,
+                                    usedBook.name,
+                                    usedBook.publisher,
+                                    usedBook.price,
+                                    usedBook.createdAt
+                            )
+                    ).from(usedBook)
+                    .where(
+                            usedBook.delYn.eq(true),
+                            usedBook.isDeleted,
+                            boolNameOrPublisherContains(searchKeyword)
+                    ).orderBy(usedBook.id.desc())
+                    .offset(pageable.getOffset())
+                    .limit(12)
+                    .fetch();
+            Long count = jpaQueryFactory
+                    .select(usedBook.count())
+                    .from(usedBook)
+                    .where(
+                            usedBook.delYn.eq(true),
+                            boolNameOrPublisherContains(searchKeyword)
+                    ).fetchOne();
+            return new PageImpl<>(content, pageable, count);
+        }
+
+
+        List<AdminUsedBookListResponse> content = jpaQueryFactory
+                .select(
+                        new QAdminUsedBookListResponse(
+                                usedBook.id,
+                                usedBook.bookStatus,
+                                usedBook.name,
+                                usedBook.publisher,
+                                usedBook.price,
+                                usedBook.createdAt
+                        )
+                ).from(usedBook)
+                .where(
+                        usedBook.bookStatus.eq(bookStatus),
+                        boolNameOrPublisherContains(searchKeyword)
+                ).orderBy(usedBook.id.desc())
+                .offset(pageable.getOffset())
+                .limit(12)
+                .fetch();
+        Long count = jpaQueryFactory
+                .select(usedBook.count())
+                .from(usedBook)
+                .where(
+                        usedBook.bookStatus.eq(bookStatus),
+                        boolNameOrPublisherContains(searchKeyword)
+                ).fetchOne();
+        return new PageImpl<>(content, pageable, count);
     }
 
-    if (bookStatus == BookStatus.DELETE) {
-      List<AdminUsedBookListResponse> content = jpaQueryFactory
-          .select(
-              new QAdminUsedBookListResponse(
-                  usedBook.id,
-                  usedBook.bookStatus,
-                  usedBook.name,
-                  usedBook.publisher,
-                  usedBook.price,
-                  usedBook.createdAt
-              )
-          ).from(usedBook)
-          .where(
-              usedBook.delYn.eq(true),
-              usedBook.isDeleted,
-              boolNameOrPublisherContains(searchKeyword)
-          ).orderBy(usedBook.id.desc())
-          .offset(pageable.getOffset())
-          .limit(12)
-          .fetch();
-      Long count = jpaQueryFactory
-          .select(usedBook.count())
-          .from(usedBook)
-          .where(
-              usedBook.delYn.eq(true),
-              boolNameOrPublisherContains(searchKeyword)
-          ).fetchOne();
-      return new PageImpl<>(content, pageable, count);
-    }
-
-
-    List<AdminUsedBookListResponse> content = jpaQueryFactory
-        .select(
-            new QAdminUsedBookListResponse(
-                usedBook.id,
-                usedBook.bookStatus,
-                usedBook.name,
-                usedBook.publisher,
-                usedBook.price,
-                usedBook.createdAt
-            )
-        ).from(usedBook)
-        .where(
-            usedBook.bookStatus.eq(bookStatus),
-            boolNameOrPublisherContains(searchKeyword)
-        ).orderBy(usedBook.id.desc())
-        .offset(pageable.getOffset())
-        .limit(12)
-        .fetch();
-    Long count = jpaQueryFactory
-        .select(usedBook.count())
-        .from(usedBook)
-        .where(
-            usedBook.bookStatus.eq(bookStatus),
-            boolNameOrPublisherContains(searchKeyword)
-        ).fetchOne();
-    return new PageImpl<>(content, pageable, count);
-  }
-
-  @Override
+    @Override
     public List<UsedBookListResponse> getUsedBookList(boolean isOrderByTradeAvailableDatetime) {
-      JPAQuery<UsedBookListResponse> query = jpaQueryFactory
-          .select(
-              new QUsedBookListResponse(
-                  usedBook.id,
-                  JPAExpressions
-                      .select(bookImage.imageUrl)
-                      .from(bookImage)
-                      .where(bookImage.usedBook.eq(usedBook)
-                          .and(bookImage.id.eq(
-                              JPAExpressions
-                                  .select(bookImage.id.min())
-                                  .from(bookImage)
-                                  .where(bookImage.usedBook.eq(usedBook))
-                          ))
-                      ),
-                  usedBook.bookStatus,
-                  usedBook.name,
-                  usedBook.tradeAvailableDatetime,
-                  usedBook.createdAt,
-                  usedBook.price
-              ))
-          .from(usedBook);
+        JPAQuery<UsedBookListResponse> query = jpaQueryFactory
+                .select(
+                        new QUsedBookListResponse(
+                                usedBook.id,
+                                JPAExpressions
+                                        .select(bookImage.imageUrl)
+                                        .from(bookImage)
+                                        .where(bookImage.usedBook.eq(usedBook)
+                                                .and(bookImage.id.eq(
+                                                        JPAExpressions
+                                                                .select(bookImage.id.min())
+                                                                .from(bookImage)
+                                                                .where(bookImage.usedBook.eq(usedBook))
+                                                ))
+                                        ),
+                                usedBook.bookStatus,
+                                usedBook.name,
+                                usedBook.tradeAvailableDatetime,
+                                usedBook.createdAt,
+                                usedBook.price
+                        ))
+                .from(usedBook);
 
-      return getUsedBooksIsOrderByTradeAvailableDatetime(isOrderByTradeAvailableDatetime, query);
+        return getUsedBooksIsOrderByTradeAvailableDatetime(isOrderByTradeAvailableDatetime, query);
     }
 
     @Override
@@ -149,17 +151,17 @@ public class UsedBookRepositoryImpl implements UsedBookRepositoryCustom {
         JPAQuery<UsedBookListResponse> query = jpaQueryFactory.select(
                         new QUsedBookListResponse(
                                 usedBook.id,
-                            JPAExpressions
-                                .select(bookImage.imageUrl)
-                                .from(bookImage)
-                                .where(bookImage.usedBook.eq(usedBook)
-                                    .and(bookImage.id.eq(
-                                        JPAExpressions
-                                            .select(bookImage.id.min())
-                                            .from(bookImage)
-                                            .where(bookImage.usedBook.eq(usedBook))
-                                    ))
-                                ),
+                                JPAExpressions
+                                        .select(bookImage.imageUrl)
+                                        .from(bookImage)
+                                        .where(bookImage.usedBook.eq(usedBook)
+                                                .and(bookImage.id.eq(
+                                                        JPAExpressions
+                                                                .select(bookImage.id.min())
+                                                                .from(bookImage)
+                                                                .where(bookImage.usedBook.eq(usedBook))
+                                                ))
+                                        ),
                                 usedBook.bookStatus,
                                 usedBook.name,
                                 usedBook.tradeAvailableDatetime,
@@ -179,17 +181,17 @@ public class UsedBookRepositoryImpl implements UsedBookRepositoryCustom {
         JPAQuery<UsedBookListResponse> query = jpaQueryFactory.select(
                         new QUsedBookListResponse(
                                 usedBook.id,
-                            JPAExpressions
-                                .select(bookImage.imageUrl)
-                                .from(bookImage)
-                                .where(bookImage.usedBook.eq(usedBook)
-                                    .and(bookImage.id.eq(
-                                        JPAExpressions
-                                            .select(bookImage.id.min())
-                                            .from(bookImage)
-                                            .where(bookImage.usedBook.eq(usedBook))
-                                    ))
-                                ),
+                                JPAExpressions
+                                        .select(bookImage.imageUrl)
+                                        .from(bookImage)
+                                        .where(bookImage.usedBook.eq(usedBook)
+                                                .and(bookImage.id.eq(
+                                                        JPAExpressions
+                                                                .select(bookImage.id.min())
+                                                                .from(bookImage)
+                                                                .where(bookImage.usedBook.eq(usedBook))
+                                                ))
+                                        ),
                                 usedBook.bookStatus,
                                 usedBook.name,
                                 usedBook.tradeAvailableDatetime,
@@ -218,7 +220,7 @@ public class UsedBookRepositoryImpl implements UsedBookRepositoryCustom {
                                     .asc(),
                             usedBook.tradeAvailableDatetime.desc()
                     ).fetch();
-        }else {
+        } else {
 
             return query
                     .where(usedBook.isDeleted.eq(false),
@@ -237,7 +239,7 @@ public class UsedBookRepositoryImpl implements UsedBookRepositoryCustom {
         }
     }
 
-  private BooleanExpression boolNameOrPublisherContains(String searchKeyword) {
-    return usedBook.name.contains(searchKeyword).or(usedBook.publisher.contains(searchKeyword));
-  }
+    private BooleanExpression boolNameOrPublisherContains(String searchKeyword) {
+        return usedBook.name.contains(searchKeyword).or(usedBook.publisher.contains(searchKeyword));
+    }
 }

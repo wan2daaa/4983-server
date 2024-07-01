@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public enum College {
     GE("교양"),
-    BUSINESS_AND_ECONOMICS("경영경제대학" ),
+    BUSINESS_AND_ECONOMICS("경영경제대학"),
     SW_CONVERGENCE("SW융합대학"),
     SOCIAL_SCIENCES("사회과학대학"),
     LITERAL_ARTS("문과대학"),

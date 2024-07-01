@@ -8,7 +8,6 @@
 
 link:index.html[메인 문서]
 
-
 === 로그인 (성공)
 
 ==== Request
@@ -19,9 +18,13 @@ include::{snippets}/member/login/success/request-fields.adoc[]
 ==== Response
 
 include::{snippets}/member/login/success/http-response.adoc[]
+
 Cookie
+
 include::{snippets}/member/login/success/response-cookies.adoc[]
+
 Response Header
+
 include::{snippets}/member/login/success/response-headers.adoc[]
 
 === 로그인 (학번 일치 안하는 경우)
@@ -53,6 +56,7 @@ include::{snippets}/member/login/fail/password/response-fields.adoc[]
 include::{snippets}/member/password/certification-number/success/http-request.adoc[]
 
 ===== query parameters
+
 include::{snippets}/member/password/certification-number/success/query-parameters.adoc[]
 
 ==== Response
@@ -66,6 +70,7 @@ include::{snippets}/member/password/certification-number/success/response-fields
 
 include::{snippets}/member/password/certification-number/fail/studentId/http-request.adoc[]
 ===== query parameters
+
 include::{snippets}/member/password/certification-number/fail/studentId/query-parameters.adoc[]
 
 ==== Response
@@ -73,13 +78,13 @@ include::{snippets}/member/password/certification-number/fail/studentId/query-pa
 include::{snippets}/member/password/certification-number/fail/studentId/http-response.adoc[]
 include::{snippets}/member/password/certification-number/fail/studentId/response-fields.adoc[]
 
-
 === 비밀번호 인증번호 보내기 (실패: 휴대폰번호와 일치하지 않는 경우)
 
 ==== Request
 
 include::{snippets}/member/password/certification-number/fail/phoneNumber/http-request.adoc[]
 ===== query parameters
+
 include::{snippets}/member/password/certification-number/fail/phoneNumber/query-parameters.adoc[]
 
 ==== Response
@@ -125,51 +130,60 @@ include::{snippets}/member/password/change/fail/phonenumber/response-fields.adoc
 === 마이페이지 api
 
 === 닉네임 중복 확인 성공
+
 ==== Request
 
 include::{snippets}/my-pages/nickname-duplicate/success/http-request.adoc[]
 include::{snippets}/my-pages/nickname-duplicate/success/query-parameters.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/nickname-duplicate/success/http-response.adoc[]
 include::{snippets}/my-pages/nickname-duplicate/success/response-fields.adoc[]
 
 === 전화번호로 인증번호 보내기
+
 ==== Request
 
 include::{snippets}/my-pages/certification-number/success/http-request.adoc[]
 include::{snippets}/my-pages/certification-number/success/query-parameters.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/certification-number/success/http-response.adoc[]
 include::{snippets}/my-pages/certification-number/success/response-fields.adoc[]
 
 === 비밀번호 변경(성공: 현재 비밀번호와 작성한 비밀번호가 같은 경우)
+
 ==== Request
 
 include::{snippets}/my-pages/change-password/verify-current-password/success/http-request.adoc[]
 include::{snippets}/my-pages/change-password/verify-current-password/success/request-fields.adoc[]
 
 ==== Request Header
+
 include::{snippets}/my-pages/change-password/verify-current-password/success/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/change-password/verify-current-password/success/http-response.adoc[]
 include::{snippets}/my-pages/change-password/verify-current-password/success/response-fields.adoc[]
 
 === 비밀번호 변경(실패: 회원이 존재하지 않는 경우)
+
 ==== Request
 
 include::{snippets}/my-pages/change-password/verify-current-password/fail/http-request.adoc[]
 include::{snippets}/my-pages/change-password/verify-current-password/fail/request-fields.adoc[]
 
 ==== Request Header
+
 include::{snippets}/my-pages/change-password/verify-current-password/fail/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/change-password/verify-current-password/fail/http-response.adoc[]
 include::{snippets}/my-pages/change-password/verify-current-password/fail/response-fields.adoc[]
-
 
 === 학번 중복 확인 (성공)
 
@@ -177,6 +191,7 @@ include::{snippets}/my-pages/change-password/verify-current-password/fail/respon
 
 include::{snippets}/member-register/duplicate/studentId/success/http-request.adoc[]
 ===== query parameters
+
 include::{snippets}/member-register/duplicate/studentId/success/query-parameters.adoc[]
 
 ==== Response
@@ -186,6 +201,7 @@ include::{snippets}/member-register/duplicate/studentId/success/http-response.ad
 === 학번 중복 확인 (실패 : 학번 중복)
 
 ==== Request
+
 include::{snippets}/member-register/duplicate/studentId/fail/http-request.adoc[]
 
 ==== Response
@@ -199,6 +215,7 @@ include::{snippets}/member-register/duplicate/studentId/fail/response-fields.ado
 
 include::{snippets}/member-register/duplicate/nickname/success/http-request.adoc[]
 ===== query parameters
+
 include::{snippets}/member-register/duplicate/nickname/success/query-parameters.adoc[]
 
 ==== Response
@@ -235,6 +252,7 @@ include::{snippets}/member-register/success/http-response.adoc[]
 include::{snippets}/member/collegeAndDepartment/success/http-request.adoc[]
 
 ===== RequestHeader
+
 include::{snippets}/member/collegeAndDepartment/success/request-headers.adoc[]
 
 ==== Response
@@ -264,70 +282,88 @@ include::{snippets}/my-pages/member-withdraw/success/request-headers.adoc[]
 include::{snippets}/my-pages/member-withdraw/success/request-cookies.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/member-withdraw/success/http-response.adoc[]
 
 === 마이페이지 프로필을 수정한다
 
 ==== Request
+
 include::{snippets}/my-pages/update/success/http-request.adoc[]
 
 ==== RequestHeader
+
 include::{snippets}/my-pages/update/success/request-headers.adoc[]
 
 ==== RequestPart
+
 include::{snippets}/my-pages/update/success/request-parts.adoc[]
 
 ==== MemberField
+
 include::{snippets}/my-pages/update/success/request-part-member-fields.adoc[]
 
 === 마이페이지 프로필을 삭제한다
 
 ==== Request
+
 include::{snippets}/my-pages/image/delete/success/http-request.adoc[]
 include::{snippets}/my-pages/image/delete/success/request-fields.adoc[]
 
 ==== RequestHeaders
+
 include::{snippets}/my-pages/image/delete/success/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/image/delete/success/http-response.adoc[]
 
 === 마이페이지 프로필 수정시 멤버의 데이터를 가져온다
 
 ==== Request
+
 include::{snippets}/my-pages/member/modifyInfo/success/http-request.adoc[]
 
 ==== RequestHeaders
+
 include::{snippets}/my-pages/member/modifyInfo/success/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/member/modifyInfo/success/http-response.adoc[]
 include::{snippets}/my-pages/member/modifyInfo/success/response-fields.adoc[]
 
 === 전화번호가 중복인 경우 true를 리턴한다
 
 ==== Request
+
 include::{snippets}/my-pages/phoneNumber/duplicate/success/http-request.adoc[]
 
 ==== RequestHeaders
+
 include::{snippets}/my-pages/phoneNumber/duplicate/success/request-headers.adoc[]
 
 ==== QueryParameters
+
 include::{snippets}/my-pages/phoneNumber/duplicate/success/query-parameters.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/phoneNumber/duplicate/success/http-response.adoc[]
 include::{snippets}/my-pages/phoneNumber/duplicate/success/response-fields.adoc[]
 
 === 마이페이지 수정하기 클릭시 비밀번호를 검증하는데 비밀번호가 같으면 true를 리턴한다
 
 ==== Request
+
 include::{snippets}/my-pages/member/password/success/http-request.adoc[]
 include::{snippets}/my-pages/member/password/success/request-fields.adoc[]
 
 ==== RequestHeaders
+
 include::{snippets}/my-pages/member/password/success/request-headers.adoc[]
 
 ==== Response
+
 include::{snippets}/my-pages/member/password/success/http-response.adoc[]
 include::{snippets}/my-pages/member/password/success/response-fields.adoc[]

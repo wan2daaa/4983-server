@@ -3,10 +3,12 @@ package team.dankookie.server4983.sms.service;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
@@ -36,14 +38,14 @@ public class SmsService {
     }
 
 
-    public SmsCertificationNumber sendCertificationNumberToPhoneNumber(String phoneNumber) {
-        int randomNumber = ThreadLocalRandom.current().nextInt(100000, 1000000);
-        String content = "안녕하세요! 4983 입니다. \n인증번호는 " + randomNumber + " 입니다.";
-
-        sendSms(phoneNumber, content);
-
-        return SmsCertificationNumber.of(String.valueOf(randomNumber));
-        }
+//    public SmsCertificationNumber sendCertificationNumberToPhoneNumber(String phoneNumber) {
+//        int randomNumber = ThreadLocalRandom.current().nextInt(100000, 1000000);
+//        String content = "안녕하세요! 4983 입니다. \n인증번호는 " + randomNumber + " 입니다.";
+//
+//        sendSms(phoneNumber, content);
+//
+//        return SmsCertificationNumber.of(String.valueOf(randomNumber));
+//        }
 
     private void sendSms(String phoneNumber, String content) {
         try {
@@ -60,7 +62,7 @@ public class SmsService {
 
             HttpEntity request = new HttpEntity(payload, headers);
 
-            var response =restTemplate.exchange(
+            var response = restTemplate.exchange(
                             apiServerUrl,
                             HttpMethod.POST,
                             request,
@@ -75,11 +77,11 @@ public class SmsService {
     }
 
     private ToSmsServerRequest setToSmsServerPayload(
-        List<RecipientList> recipientList, String content, String sendPhoneNumber ) {
+            List<RecipientList> recipientList, String content, String sendPhoneNumber) {
         return ToSmsServerRequest.builder()
-            .body(content)
-            .sendNo(sendPhoneNumber)
-            .recipientList(recipientList)
+                .body(content)
+                .sendNo(sendPhoneNumber)
+                .recipientList(recipientList)
                 .build();
     }
 

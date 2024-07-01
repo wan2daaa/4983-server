@@ -80,7 +80,6 @@ class UsedBookRepositoryTest extends BaseRepositoryTest {
                 .build();
 
 
-
         usedBookRepository.save(usedBookSold);
         usedBookRepository.save(usedBookTrade);
         usedBookRepository.save(usedBookSale);
@@ -143,7 +142,7 @@ class UsedBookRepositoryTest extends BaseRepositoryTest {
                 .college(College.BUSINESS_AND_ECONOMICS)
                 .department(Department.ACCOUNTING)
                 .sellerMember(member)
-                .tradeAvailableDatetime(LocalDateTime.now())                .bookStatus(BookStatus.SALE)
+                .tradeAvailableDatetime(LocalDateTime.now()).bookStatus(BookStatus.SALE)
                 .price(10000)
                 .name("책이름")
                 .build();

@@ -25,14 +25,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class MemberPhoneNumberControllerTest extends BaseControllerTest {
-    @MockBean
-    MemberService memberService;
-
-    @MockBean
-    CoolSmsService smsService;
 
     @Test
-    void 휴대폰번호를_받으면_인증번호를_리턴한다() throws Exception{
+    void 휴대폰번호를_받으면_인증번호를_리턴한다() throws Exception {
         //given
         final String phoneNumber = "01012345678";
         final String certificationNumber = "123456";

@@ -19,13 +19,13 @@ public class MyPageBookPurchaseDetailListService {
     private final BookPurchaseDetailRepository bookPurchaseDetailRepository;
     private final MemberRepository memberRepository;
 
-    public List<UsedBookListResponse> getMyPageBookPurchaseDetailList(BookStatus bookStatus, AccessToken accessToken){
+    public List<UsedBookListResponse> getMyPageBookPurchaseDetailList(BookStatus bookStatus, AccessToken accessToken) {
 
         String nickname = accessToken.nickname();
 
         Member member = memberRepository.findByNickname(nickname)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
-    return bookPurchaseDetailRepository.getMyPageBookPurchaseDetailList(bookStatus, member.getId());
+        return bookPurchaseDetailRepository.getMyPageBookPurchaseDetailList(bookStatus, member.getId());
     }
 }

@@ -1,15 +1,10 @@
 package team.dankookie.server4983.chat.domain;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +24,7 @@ import team.dankookie.server4983.member.domain.Member;
 public class ChatRoom extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long chatRoomId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,9 +34,11 @@ public class ChatRoom extends BaseEntity {
     private Member seller;
 
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<BuyerChat> buyerChats = new ArrayList<>();
 
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<SellerChat> sellerChats = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -54,7 +51,7 @@ public class ChatRoom extends BaseEntity {
     @OneToOne(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true)
     private Locker locker;
 
-    public static ChatRoom buildChatRoom(Member buyer , Member seller , UsedBook usedBook) {
+    public static ChatRoom buildChatRoom(Member buyer, Member seller, UsedBook usedBook) {
         return ChatRoom.builder().buyer(buyer).seller(seller).usedBook(usedBook).build();
     }
 
@@ -62,7 +59,7 @@ public class ChatRoom extends BaseEntity {
         if (this.getBuyerChats() == null) {
             this.buyerChats = new ArrayList<>();
             this.getBuyerChats().add(chat);
-        }else {
+        } else {
             this.getBuyerChats().add(chat);
         }
     }
@@ -71,7 +68,7 @@ public class ChatRoom extends BaseEntity {
         if (this.getSellerChats() == null) {
             this.sellerChats = new ArrayList<>();
             this.getSellerChats().add(chat);
-        }else {
+        } else {
             this.getSellerChats().add(chat);
         }
     }

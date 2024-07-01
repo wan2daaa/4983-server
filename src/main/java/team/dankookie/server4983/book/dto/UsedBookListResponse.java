@@ -6,7 +6,7 @@ import team.dankookie.server4983.book.constant.BookStatus;
 
 import java.time.LocalDateTime;
 
-public record UsedBookListResponse (
+public record UsedBookListResponse(
         Long usedBookId,
         String imageUrl,
         BookStatus bookStatus,
@@ -14,7 +14,7 @@ public record UsedBookListResponse (
         LocalDateTime tradeAvailableDatetime,
         LocalDateTime createdAt,
         Integer price
-){
+) {
 
     @Builder
     @QueryProjection
@@ -28,7 +28,7 @@ public record UsedBookListResponse (
         this.price = price;
     }
 
-    public static UsedBookListResponse of (Long usedBookId, String imageUrl, BookStatus bookStatus, String name, LocalDateTime tradeAvailableDatetime, LocalDateTime createdAt, Integer price) {
+    public static UsedBookListResponse of(Long usedBookId, String imageUrl, BookStatus bookStatus, String name, LocalDateTime tradeAvailableDatetime, LocalDateTime createdAt, Integer price) {
         return new UsedBookListResponse(usedBookId, imageUrl, bookStatus, name, tradeAvailableDatetime, createdAt, price);
     }
 }

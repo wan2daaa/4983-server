@@ -24,17 +24,17 @@ public class BookSalesDetailRepositoryImpl implements BookSalesDetailRepositoryC
         JPAQuery<UsedBookListResponse> query = queryFactory.select(
                 new QUsedBookListResponse(
                         usedBook.id,
-                    JPAExpressions
-                        .select(bookImage.imageUrl)
-                        .from(bookImage)
-                        .where(bookImage.usedBook.eq(usedBook)
-                            .and(bookImage.id.eq(
-                                JPAExpressions
-                                    .select(bookImage.id.min())
-                                    .from(bookImage)
-                                    .where(bookImage.usedBook.eq(usedBook))
-                            ))
-                        ),
+                        JPAExpressions
+                                .select(bookImage.imageUrl)
+                                .from(bookImage)
+                                .where(bookImage.usedBook.eq(usedBook)
+                                        .and(bookImage.id.eq(
+                                                JPAExpressions
+                                                        .select(bookImage.id.min())
+                                                        .from(bookImage)
+                                                        .where(bookImage.usedBook.eq(usedBook))
+                                        ))
+                                ),
                         usedBook.bookStatus,
                         usedBook.name,
                         usedBook.tradeAvailableDatetime,
@@ -42,25 +42,25 @@ public class BookSalesDetailRepositoryImpl implements BookSalesDetailRepositoryC
                         usedBook.price
                 )
         ).from(usedBook);
-        return getMyPageBooksCanBuy(canBuy, memberId,query);
+        return getMyPageBooksCanBuy(canBuy, memberId, query);
     }
 
-    private List<UsedBookListResponse> getMyPageBooksCanBuy(boolean canBuy, Long memberId, JPAQuery<UsedBookListResponse> query){
-        if(canBuy){
+    private List<UsedBookListResponse> getMyPageBooksCanBuy(boolean canBuy, Long memberId, JPAQuery<UsedBookListResponse> query) {
+        if (canBuy) {
             return query
                     .where(
                             usedBook.bookStatus.eq(BookStatus.SALE)
-                        .and(
-                            usedBook.sellerMember.id.eq(memberId)
-                            ))
+                                    .and(
+                                            usedBook.sellerMember.id.eq(memberId)
+                                    ))
                     .orderBy(usedBook.createdAt.desc()).fetch();
-        } else{
+        } else {
             return query
                     .where(
                             usedBook.bookStatus.eq(BookStatus.SOLD)
-                        .and(
-                            usedBook.sellerMember.id.eq(memberId)
-                            ))
+                                    .and(
+                                            usedBook.sellerMember.id.eq(memberId)
+                                    ))
                     .orderBy(usedBook.createdAt.desc()).fetch();
         }
 

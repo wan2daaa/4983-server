@@ -26,12 +26,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class MemberMyPageControllerTest extends BaseControllerTest {
 
-    @MockBean
-    MemberService memberService;
     @Test
     void 마이페이지_수정시_멤버의_데이터를_가져온다() throws Exception {
         //given
-        String accessToken = jwtTokenUtils.generateJwtToken("nickname",  TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
+        String accessToken = jwtTokenUtils.generateJwtToken("nickname", TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
         Member findMember = Member.builder().nickname("testNickname").build();
         MemberMyPageModifyResponse response = MemberMyPageModifyResponse.of("test.png", findMember.getNickname(), AccountBank.KB, "938002-00-613983", "010-8766-5450");
         when(memberService.getMyPageMemberModifyInfo(anyString())).thenReturn(response);
@@ -59,14 +57,14 @@ class MemberMyPageControllerTest extends BaseControllerTest {
     void 마이페이지를_수정하기위해_비밀번호로_본인인증을하는데_비밀번호가_같은경우_true를_리턴한다() throws Exception {
         //given
         final String password = "password";
-        String accessToken = jwtTokenUtils.generateJwtToken("nickname",  TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
+        String accessToken = jwtTokenUtils.generateJwtToken("nickname", TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
         when(memberService.isMemberPasswordMatch(any(), anyString()))
                 .thenReturn(true);
         //when
         ResultActions resultActions = mockMvc.perform(post(API + "/my-pages/member/password")
                         .header(HttpHeaders.AUTHORIZATION, accessToken)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"password\":\""+password+"\"}"))
+                        .content("{\"password\":\"" + password + "\"}"))
                 .andDo(print());
         //then
         resultActions.andExpect(status().isOk())

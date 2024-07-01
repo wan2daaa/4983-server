@@ -7,14 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import team.dankookie.server4983.book.service.*;
+import team.dankookie.server4983.chat.service.ChatService;
 import team.dankookie.server4983.jwt.constants.TokenSecretKey;
+import team.dankookie.server4983.jwt.service.RefreshTokenService;
 import team.dankookie.server4983.jwt.util.JwtTokenUtils;
+import team.dankookie.server4983.member.service.MemberService;
+import team.dankookie.server4983.sms.service.CoolSmsService;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 
@@ -47,4 +53,31 @@ public abstract class BaseControllerTest extends BaseDisplayNameConfig {
                 .build();
     }
 
+
+    @MockBean
+    protected LockerService lockerService;
+
+    @MockBean
+    protected MyPageBookPurchaseDetailListService myPageBookPurchaseDetailListService;
+
+    @MockBean
+    protected MyPageBookSalesDetailListService myPageBookSalesDetailListService;
+
+    @MockBean
+    protected UsedBookService usedBookService;
+
+    @MockBean
+    protected UsedBookListService usedBookListService;
+
+    @MockBean
+    protected ChatService chatService;
+
+    @MockBean
+    protected MemberService memberService;
+
+    @MockBean
+    protected RefreshTokenService refreshTokenService;
+
+    @MockBean
+    protected CoolSmsService smsService;
 }

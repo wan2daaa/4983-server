@@ -1,17 +1,11 @@
 package team.dankookie.server4983.chat.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +25,8 @@ import team.dankookie.server4983.chat.dto.ChatMessageResponse;
 @Entity
 public class SellerChat {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -54,14 +49,14 @@ public class SellerChat {
     @JoinColumn(name = "chat_room_id")
     private ChatRoom chatRoom;
 
-    public static SellerChat buildSellerChat(String message , ContentType contentType) {
+    public static SellerChat buildSellerChat(String message, ContentType contentType) {
         return SellerChat.builder()
                 .message(message)
                 .contentType(contentType)
                 .build();
     }
 
-    public static SellerChat buildSellerChat(String message , ContentType contentType, ChatRoom chatRoom) {
+    public static SellerChat buildSellerChat(String message, ContentType contentType, ChatRoom chatRoom) {
         return SellerChat.builder()
                 .message(message)
                 .contentType(contentType)
@@ -71,10 +66,10 @@ public class SellerChat {
 
     public ChatMessageResponse toChatMessageResponse() {
         return ChatMessageResponse.of(
-            chatRoom.getChatRoomId(),
-            message,
-            contentType,
-            createdAt
+                chatRoom.getChatRoomId(),
+                message,
+                contentType,
+                createdAt
         );
     }
 

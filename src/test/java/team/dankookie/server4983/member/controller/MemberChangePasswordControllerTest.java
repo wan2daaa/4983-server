@@ -23,11 +23,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class MemberChangePasswordControllerTest extends BaseControllerTest {
-    @MockBean
-    MemberService memberService;
 
     @Test
-    void 현재비밀번호와_작성한_비밀번호가_같은경우_true를_리턴한다() throws Exception{
+    void 현재비밀번호와_작성한_비밀번호가_같은경우_true를_리턴한다() throws Exception {
         //given
         final String password = "password";
         final String accessToken = "accessToken";
@@ -38,7 +36,7 @@ public class MemberChangePasswordControllerTest extends BaseControllerTest {
         ResultActions resultActions = mockMvc.perform(post(API + "/my-pages/change-password/verify-current-password")
                         .header(HttpHeaders.AUTHORIZATION, accessToken)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"password\":\""+password+"\"}"))
+                        .content("{\"password\":\"" + password + "\"}"))
                 .andDo(print());
 
         //then
@@ -52,16 +50,16 @@ public class MemberChangePasswordControllerTest extends BaseControllerTest {
                                         headerWithName(HttpHeaders.AUTHORIZATION).description("accessToken")
                                 ),
                                 responseFields(
-                                    fieldWithPath("isPasswordMatch").description("패스워드가 일치하는지 여부")
+                                        fieldWithPath("isPasswordMatch").description("패스워드가 일치하는지 여부")
                                 )
-                                )
+                        )
                 );
 
 
     }
 
     @Test
-    void 회원이_존재하지_않는경우_에러를_리턴한다() throws Exception{
+    void 회원이_존재하지_않는경우_에러를_리턴한다() throws Exception {
         //given
         final String password = "password";
         final String accessToken = "accessToken";
@@ -72,7 +70,7 @@ public class MemberChangePasswordControllerTest extends BaseControllerTest {
         ResultActions resultActions = mockMvc.perform(post(API + "/my-pages/change-password/verify-current-password")
                         .header(HttpHeaders.AUTHORIZATION, accessToken)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"password\":\""+password+"\"}"))
+                        .content("{\"password\":\"" + password + "\"}"))
                 .andDo(print());
 
         //then

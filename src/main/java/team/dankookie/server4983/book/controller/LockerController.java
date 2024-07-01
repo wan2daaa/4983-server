@@ -1,6 +1,7 @@
 package team.dankookie.server4983.book.controller;
 
 import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,26 +22,26 @@ import team.dankookie.server4983.jwt.dto.AccessToken;
 @RequestMapping("/api/v1/locker")
 public class LockerController {
 
-  private final LockerService lockerService;
+    private final LockerService lockerService;
 
-  @GetMapping("/chat-room-available-date")
-  public ResponseEntity<List<LockerResponse>> getExistsLockerWhenChatRoomAvailableDate(@RequestParam Long chatRoomId) {
+    @GetMapping("/chat-room-available-date")
+    public ResponseEntity<List<LockerResponse>> getExistsLockerWhenChatRoomAvailableDate(@RequestParam Long chatRoomId) {
 
-    return ResponseEntity.ok(lockerService.getExistsLockerWhenChatRoomAvailableDate(chatRoomId));
-  }
-
-  @PostMapping
-  public ResponseEntity<BaseMessageResponse> saveLocker(@RequestBody LockerSaveRequest lockerSaveRequest, AccessToken accessToken) {
-
-    boolean isSaved = lockerService.saveLocker(lockerSaveRequest, accessToken);
-
-    if (isSaved) {
-      return ResponseEntity.status(HttpStatus.CREATED).body(
-          BaseMessageResponse.of("정상적으로 저장되었습니다.")
-      );
+        return ResponseEntity.ok(lockerService.getExistsLockerWhenChatRoomAvailableDate(chatRoomId));
     }
 
-    return ResponseEntity.badRequest().body(BaseMessageResponse.of("서버의 문제로 저장에 실패하였습니다."));
-  }
+    @PostMapping
+    public ResponseEntity<BaseMessageResponse> saveLocker(@RequestBody LockerSaveRequest lockerSaveRequest, AccessToken accessToken) {
+
+        boolean isSaved = lockerService.saveLocker(lockerSaveRequest, accessToken);
+
+        if (isSaved) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(
+                    BaseMessageResponse.of("정상적으로 저장되었습니다.")
+            );
+        }
+
+        return ResponseEntity.badRequest().body(BaseMessageResponse.of("서버의 문제로 저장에 실패하였습니다."));
+    }
 
 }

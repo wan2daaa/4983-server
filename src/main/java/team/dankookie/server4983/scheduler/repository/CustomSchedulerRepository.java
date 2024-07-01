@@ -13,10 +13,10 @@ public interface CustomSchedulerRepository {
 
     List<Schedule> findByAlertTime(LocalDateTime time);
 
-    List<ChatRoom> findChatRoomPreviouslyTime(long time , int interactStep);
+    List<ChatRoom> findChatRoomPreviouslyTime(long time, int interactStep);
 
-    List<ChatRoom> findChatRoomAfterTime(long time , int interactStep);
+    List<ChatRoom> findChatRoomAfterTime(long time, int interactStep);
 
-    Optional<AdminReport> findByChatRoomAndReportType(ChatRoom chatRoom , ReportType reportType);
+    Optional<AdminReport> findByChatRoomAndReportType(ChatRoom chatRoom, ReportType reportType);
 
 }

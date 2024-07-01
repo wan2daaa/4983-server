@@ -19,47 +19,47 @@ import team.dankookie.server4983.jwt.util.JwtTokenUtils;
 @RequestMapping("/api/v1/token")
 public class JwtController {
 
-  private final JwtTokenUtils jwtTokenUtils;
+    private final JwtTokenUtils jwtTokenUtils;
 
-  @GetMapping("/valid")
-  public ResponseEntity<Void> isAccessTokenValid(HttpServletRequest request,
-      HttpServletResponse response) {
+    @GetMapping("/valid")
+    public ResponseEntity<Void> isAccessTokenValid(HttpServletRequest request,
+                                                   HttpServletResponse response) {
 
-    String accessToken = request.getHeader(HttpHeaders.AUTHORIZATION);
+        String accessToken = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-    if (accessToken == null ) {
-      response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-      return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
+        if (accessToken == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
+        }
+
+        String nickname = jwtTokenUtils.getNickname(accessToken);
+        Boolean validate = jwtTokenUtils.validate(accessToken, nickname);
+
+        if (validate) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
+        }
     }
 
-    String nickname = jwtTokenUtils.getNickname(accessToken);
-    Boolean validate = jwtTokenUtils.validate(accessToken, nickname);
+    @GetMapping("/update")
+    public ResponseEntity<Void> updateAccessToken(
+            @CookieValue(name = "refreshToken") Cookie refreshTokenCookie
+    ) {
 
-    if (validate) {
-      return ResponseEntity.ok().build();
-    } else {
-      return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
+        String refreshToken = refreshTokenCookie.getValue();
+
+        String nickname = jwtTokenUtils.getNickname(refreshToken);
+        Boolean validate = jwtTokenUtils.validate(refreshToken, nickname);
+
+        if (validate) {
+            String newAccessToken = jwtTokenUtils.generateJwtToken(nickname,
+                    TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
+            return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, newAccessToken).build();
+        } else {
+            return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
+        }
     }
-  }
-
-  @GetMapping("/update")
-  public ResponseEntity<Void> updateAccessToken(
-      @CookieValue(name = "refreshToken") Cookie refreshTokenCookie
-  ) {
-
-    String refreshToken = refreshTokenCookie.getValue();
-
-    String nickname = jwtTokenUtils.getNickname(refreshToken);
-    Boolean validate = jwtTokenUtils.validate(refreshToken, nickname);
-
-    if (validate) {
-      String newAccessToken = jwtTokenUtils.generateJwtToken(nickname,
-          TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
-      return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, newAccessToken).build();
-    } else {
-      return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
-    }
-  }
 
 
 }

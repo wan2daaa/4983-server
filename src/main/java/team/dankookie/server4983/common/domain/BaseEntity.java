@@ -3,7 +3,9 @@ package team.dankookie.server4983.common.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
+
 import java.time.LocalDateTime;
+
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -14,14 +16,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Getter
 public abstract class BaseEntity {
 
-  @Column(updatable = false)
-  @CreatedDate
-  private LocalDateTime createdAt;
+    @Column(updatable = false)
+    @CreatedDate
+    private LocalDateTime createdAt;
 
-  @LastModifiedDate
-  private LocalDateTime updatedAt;
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
-  //MYSQL 에서만 작동 db 변경시 수정 필요
-  @Column(columnDefinition = "boolean default false")
-  private Boolean delYn;
+    //MYSQL 에서만 작동 db 변경시 수정 필요
+    @Column(columnDefinition = "boolean default false")
+    private Boolean delYn;
 }

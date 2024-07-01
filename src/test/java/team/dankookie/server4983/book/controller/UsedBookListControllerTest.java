@@ -26,9 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class UsedBookListControllerTest extends BaseControllerTest {
 
-    @MockBean
-    private UsedBookListService usedBookListService;
-
     @Test
     void 서적의_모든_리스트를_반환한다() throws Exception {
         //given
@@ -149,6 +146,7 @@ class UsedBookListControllerTest extends BaseControllerTest {
                         ));
 
     }
+
     @Test
     void 서적을_키워드로_검색을_한다() throws Exception {
         //given

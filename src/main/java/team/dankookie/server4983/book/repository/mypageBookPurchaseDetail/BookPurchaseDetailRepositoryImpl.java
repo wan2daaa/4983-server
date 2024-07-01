@@ -15,11 +15,11 @@ import static team.dankookie.server4983.book.domain.QBookImage.bookImage;
 import static team.dankookie.server4983.book.domain.QUsedBook.usedBook;
 
 @RequiredArgsConstructor
-public class BookPurchaseDetailRepositoryImpl implements BookPurchaseDetailRepositoryCustom{
+public class BookPurchaseDetailRepositoryImpl implements BookPurchaseDetailRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<UsedBookListResponse> getMyPageBookPurchaseDetailList(BookStatus bookStatus, Long memberId){
+    public List<UsedBookListResponse> getMyPageBookPurchaseDetailList(BookStatus bookStatus, Long memberId) {
         JPAQuery<UsedBookListResponse> query = queryFactory.select(
                 new QUsedBookListResponse(
                         usedBook.id,
@@ -34,8 +34,8 @@ public class BookPurchaseDetailRepositoryImpl implements BookPurchaseDetailRepos
                         usedBook.price
                 )
         ).from(usedBook);
-    return getMyPageBookStatus(bookStatus, memberId, query);
-}
+        return getMyPageBookStatus(bookStatus, memberId, query);
+    }
 
     private List<UsedBookListResponse> getMyPageBookStatus(BookStatus bookStatus, Long memberId, JPAQuery<UsedBookListResponse> query) {
         if (Objects.requireNonNull(bookStatus) == BookStatus.SOLD) {

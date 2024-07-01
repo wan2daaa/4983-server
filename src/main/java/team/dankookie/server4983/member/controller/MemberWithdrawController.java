@@ -23,13 +23,13 @@ public class MemberWithdrawController {
 
         boolean isWithdraw = memberService.checkMemberAndWithdraw(accessToken);
         if (isWithdraw) {
-                refreshTokenCookie.setMaxAge(0);
-                response.addCookie(refreshTokenCookie);
-                return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
+            refreshTokenCookie.setMaxAge(0);
+            response.addCookie(refreshTokenCookie);
+            return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
 
-        }else {
-                return ResponseEntity.badRequest().body("이미 탈퇴한 회원이거나 회원을 찾을 수 없습니다.");
-            }
+        } else {
+            return ResponseEntity.badRequest().body("이미 탈퇴한 회원이거나 회원을 찾을 수 없습니다.");
         }
     }
+}
 

@@ -1,6 +1,6 @@
 package team.dankookie.server4983.jwt.dto;
 
-public record AccessToken (
+public record AccessToken(
         String value,
         String nickname
 ) {

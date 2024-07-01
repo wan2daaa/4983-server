@@ -18,23 +18,23 @@ import team.dankookie.server4983.member.service.AdminMemberService;
 @RequestMapping("/api/v1/admin/member")
 public class AdminMemberController {
 
-  private final AdminMemberService adminMemberService;
+    private final AdminMemberService adminMemberService;
 
 
-  @GetMapping
-  public Page<AdminMemberListResponse> getMember(Pageable pageable, @RequestParam(value = "") String searchKeyword){
-    return adminMemberService.getMember(pageable, searchKeyword);
-  }
+    @GetMapping
+    public Page<AdminMemberListResponse> getMember(Pageable pageable, @RequestParam(value = "") String searchKeyword) {
+        return adminMemberService.getMember(pageable, searchKeyword);
+    }
 
-  @GetMapping("/block")
-  public Page<AdminMemberListResponse> getBlockedMember(Pageable pageable, @RequestParam(value = "") String searchKeyword){
-    return adminMemberService.getBlockedMember(pageable, searchKeyword);
-  }
+    @GetMapping("/block")
+    public Page<AdminMemberListResponse> getBlockedMember(Pageable pageable, @RequestParam(value = "") String searchKeyword) {
+        return adminMemberService.getBlockedMember(pageable, searchKeyword);
+    }
 
 
-  @PatchMapping("/block/{id}")
-  public ResponseEntity<Boolean> blockMember(@PathVariable Long id){
-    return ResponseEntity.ok(adminMemberService.blockMember(id));
-  }
+    @PatchMapping("/block/{id}")
+    public ResponseEntity<Boolean> blockMember(@PathVariable Long id) {
+        return ResponseEntity.ok(adminMemberService.blockMember(id));
+    }
 
 }

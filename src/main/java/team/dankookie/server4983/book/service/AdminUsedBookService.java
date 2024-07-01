@@ -14,17 +14,17 @@ import team.dankookie.server4983.book.repository.usedBook.UsedBookRepository;
 @Service
 public class AdminUsedBookService {
 
-  private final UsedBookRepository usedBookRepository;
+    private final UsedBookRepository usedBookRepository;
 
-  public Page<AdminUsedBookListResponse> getUsedBook(Pageable pageable, String searchKeyword, BookStatus bookStatus) {
+    public Page<AdminUsedBookListResponse> getUsedBook(Pageable pageable, String searchKeyword, BookStatus bookStatus) {
 
-    return usedBookRepository.getAdminUsedBookList(pageable, searchKeyword, bookStatus);
-  }
+        return usedBookRepository.getAdminUsedBookList(pageable, searchKeyword, bookStatus);
+    }
 
-  @Transactional
-  public void updateBookStatus(Long id, BookStatus bookStatus) {
-    UsedBook usedBook = usedBookRepository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
-    usedBook.setBookStatus(bookStatus);
-  }
+    @Transactional
+    public void updateBookStatus(Long id, BookStatus bookStatus) {
+        UsedBook usedBook = usedBookRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+        usedBook.setBookStatus(bookStatus);
+    }
 }

@@ -19,19 +19,19 @@ import team.dankookie.server4983.book.service.AdminUsedBookService;
 @RequestMapping("/api/v1/admin/used-book")
 public class AdminUsedBookController {
 
-  private final AdminUsedBookService adminUsedBookService;
+    private final AdminUsedBookService adminUsedBookService;
 
-  @GetMapping
-  public Page<AdminUsedBookListResponse> getMember(Pageable pageable, @RequestParam(value = "") String searchKeyword, @RequestParam(required = false) BookStatus bookStatus){
+    @GetMapping
+    public Page<AdminUsedBookListResponse> getMember(Pageable pageable, @RequestParam(value = "") String searchKeyword, @RequestParam(required = false) BookStatus bookStatus) {
 
-    return adminUsedBookService.getUsedBook(pageable, searchKeyword, bookStatus);
-  }
+        return adminUsedBookService.getUsedBook(pageable, searchKeyword, bookStatus);
+    }
 
-  @PatchMapping("/{id}/{bookStatus}")
-  public ResponseEntity<Void> updateBookStatus(@PathVariable Long id, @PathVariable BookStatus bookStatus){
-    adminUsedBookService.updateBookStatus(id, bookStatus);
-    return ResponseEntity.ok().build();
+    @PatchMapping("/{id}/{bookStatus}")
+    public ResponseEntity<Void> updateBookStatus(@PathVariable Long id, @PathVariable BookStatus bookStatus) {
+        adminUsedBookService.updateBookStatus(id, bookStatus);
+        return ResponseEntity.ok().build();
 
-  }
+    }
 
 }

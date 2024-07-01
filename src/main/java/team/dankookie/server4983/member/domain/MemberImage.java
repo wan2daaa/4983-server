@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class MemberImage {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String imageUrl;
@@ -23,7 +23,7 @@ public class MemberImage {
     private Member member;
 
     @Builder
-    public MemberImage(String imageUrl, Member member){
+    public MemberImage(String imageUrl, Member member) {
         this.imageUrl = imageUrl;
         this.member = member;
     }

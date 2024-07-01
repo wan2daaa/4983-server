@@ -23,20 +23,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class MemberPhoneNumberDuplicateControllerTest extends BaseControllerTest {
-    
-    @MockBean
-    MemberService memberService;
-    
+
     @Test
     void 멤버의_전화번호가_중복인경우_true를_리턴한다() throws Exception {
         //given
-        String accessToken = jwtTokenUtils.generateJwtToken("nickname",  TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
+        String accessToken = jwtTokenUtils.generateJwtToken("nickname", TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
         String phoneNumber = "010-1234-1234";
         when(memberService.checkPhoneNumberDuplicate(any(), anyString())).thenReturn(true);
         //when
         ResultActions resultActions = mockMvc.perform(get(API + "/my-pages/phoneNumber/duplicate")
                         .param("phoneNumber", phoneNumber)
-                .header(HttpHeaders.AUTHORIZATION, accessToken))
+                        .header(HttpHeaders.AUTHORIZATION, accessToken))
                 .andDo(print());
 
 

@@ -17,7 +17,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SchedulerRepositoryTest extends BaseRepositoryTest  {
+public class SchedulerRepositoryTest extends BaseRepositoryTest {
 
     @Autowired
     SchedulerRepository schedulerRepository;
@@ -34,19 +34,19 @@ public class SchedulerRepositoryTest extends BaseRepositoryTest  {
     @Test
     public void 특정시간에작동되는스케쥴러가져오기() {
         // given
-        schedulerRepository.save(Schedule.builder().message("message1").time(LocalDateTime.of(2023 , 3 , 2 , 10 , 0 , 0)).build());
-        schedulerRepository.save(Schedule.builder().message("message2").time(LocalDateTime.of(2023 , 3 , 2 , 10 , 10 , 0)).build());
-        schedulerRepository.save(Schedule.builder().message("message3").time(LocalDateTime.of(2023 , 3 , 2 , 10 , 20 , 0)).build());
-        schedulerRepository.save(Schedule.builder().message("message4").time(LocalDateTime.of(2023 , 3 , 2 , 10 , 20 , 0)).build());
-        schedulerRepository.save(Schedule.builder().message("message5").time(LocalDateTime.of(2023 , 3 , 2 , 10 , 30 , 0)).build());
-        schedulerRepository.save(Schedule.builder().message("message6").time(LocalDateTime.of(2023 , 3 , 2 , 10 , 40 , 0)).build());
-        schedulerRepository.save(Schedule.builder().message("message7").time(LocalDateTime.of(2023 , 3 , 3 , 10 , 0 , 0)).build());
-        schedulerRepository.save(Schedule.builder().message("message8").time(LocalDateTime.of(2023 , 3 , 3 , 10 , 10 , 0)).build());
-        schedulerRepository.save(Schedule.builder().message("message9").time(LocalDateTime.of(2023 , 3 , 2 , 10 , 20 , 0)).build());
-        schedulerRepository.save(Schedule.builder().message("message10").time(LocalDateTime.of(2023 , 3 , 3 , 10 , 30 , 0)).build());
+        schedulerRepository.save(Schedule.builder().message("message1").time(LocalDateTime.of(2023, 3, 2, 10, 0, 0)).build());
+        schedulerRepository.save(Schedule.builder().message("message2").time(LocalDateTime.of(2023, 3, 2, 10, 10, 0)).build());
+        schedulerRepository.save(Schedule.builder().message("message3").time(LocalDateTime.of(2023, 3, 2, 10, 20, 0)).build());
+        schedulerRepository.save(Schedule.builder().message("message4").time(LocalDateTime.of(2023, 3, 2, 10, 20, 0)).build());
+        schedulerRepository.save(Schedule.builder().message("message5").time(LocalDateTime.of(2023, 3, 2, 10, 30, 0)).build());
+        schedulerRepository.save(Schedule.builder().message("message6").time(LocalDateTime.of(2023, 3, 2, 10, 40, 0)).build());
+        schedulerRepository.save(Schedule.builder().message("message7").time(LocalDateTime.of(2023, 3, 3, 10, 0, 0)).build());
+        schedulerRepository.save(Schedule.builder().message("message8").time(LocalDateTime.of(2023, 3, 3, 10, 10, 0)).build());
+        schedulerRepository.save(Schedule.builder().message("message9").time(LocalDateTime.of(2023, 3, 2, 10, 20, 0)).build());
+        schedulerRepository.save(Schedule.builder().message("message10").time(LocalDateTime.of(2023, 3, 3, 10, 30, 0)).build());
 
         // when
-        List<Schedule> result = schedulerRepository.findByAlertTime(LocalDateTime.of(2023 , 3 , 2 , 10 , 20 , 0));
+        List<Schedule> result = schedulerRepository.findByAlertTime(LocalDateTime.of(2023, 3, 2, 10, 20, 0));
 
         // then
         assertThat(result.size()).isEqualTo(3);
@@ -74,7 +74,7 @@ public class SchedulerRepositoryTest extends BaseRepositoryTest  {
         chatRoomRepository.save(ChatRoom.builder().usedBook(usedBook06).interactStep(0).build());
 
         // when
-        List<ChatRoom> result = schedulerRepository.findChatRoomPreviouslyTime(30 , 0);
+        List<ChatRoom> result = schedulerRepository.findChatRoomPreviouslyTime(30, 0);
 
         // then
         assertThat(result.size()).isEqualTo(3);
@@ -99,7 +99,7 @@ public class SchedulerRepositoryTest extends BaseRepositoryTest  {
         chatRoomRepository.save(ChatRoom.builder().usedBook(usedBook06).interactStep(0).build());
 
         // when
-        List<ChatRoom> result = schedulerRepository.findChatRoomPreviouslyTime(300 , 0);
+        List<ChatRoom> result = schedulerRepository.findChatRoomPreviouslyTime(300, 0);
 
         // then
         assertThat(result.size()).isEqualTo(3);
@@ -124,7 +124,7 @@ public class SchedulerRepositoryTest extends BaseRepositoryTest  {
         chatRoomRepository.save(ChatRoom.builder().usedBook(usedBook06).interactStep(0).build());
 
         // when
-        List<ChatRoom> result = schedulerRepository.findChatRoomAfterTime(30 , 0);
+        List<ChatRoom> result = schedulerRepository.findChatRoomAfterTime(30, 0);
 
         // then
         assertThat(result.size()).isEqualTo(3);
@@ -149,7 +149,7 @@ public class SchedulerRepositoryTest extends BaseRepositoryTest  {
         chatRoomRepository.save(ChatRoom.builder().usedBook(usedBook06).interactStep(0).build());
 
         // when
-        List<ChatRoom> result = schedulerRepository.findChatRoomAfterTime(300 , 0);
+        List<ChatRoom> result = schedulerRepository.findChatRoomAfterTime(300, 0);
 
         // then
         assertThat(result.size()).isEqualTo(3);

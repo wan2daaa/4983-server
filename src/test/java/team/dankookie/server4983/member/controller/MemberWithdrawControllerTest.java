@@ -31,45 +31,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class MemberWithdrawControllerTest extends BaseControllerTest {
 
-    @InjectMocks
-    private MemberWithdrawController withdrawController;
-
-    @MockBean
-    MemberService memberService;
-
-    @MockBean
-    private HttpServletRequest request;
-
-    @MockBean
-    private HttpServletResponse response;
-
     @Test
     void 회원을_탈퇴한다() throws Exception {
         //given
-        String accessToken = jwtTokenUtils.generateJwtToken("nickname",  TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
+        String accessToken = jwtTokenUtils.generateJwtToken("nickname", TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
         String withdrawUrl = API + "/withdraw";
         Cookie refreshTokenCookie = new Cookie("refreshToken", "example_refresh_token");
         when(memberService.checkMemberAndWithdraw(AccessToken.of(accessToken, "nickname")))
                 .thenReturn(true);
 
-        when(request.getCookies()).thenReturn(new Cookie[]{refreshTokenCookie});
-
         //when
         ResultActions resultActions = mockMvc.perform(patch(withdrawUrl)
                         .contentType(MediaType.APPLICATION_JSON)
                         .cookie(refreshTokenCookie)
-                        .header(HttpHeaders.AUTHORIZATION,  accessToken))
+                        .header(HttpHeaders.AUTHORIZATION, accessToken))
                 .andDo(print());
         //then
         resultActions.andExpect(status().isOk())
                 .andExpect(content().string("회원 탈퇴가 완료되었습니다."))
                 .andDo(document("my-pages/member-withdraw/success",
-                        requestHeaders(
-                                headerWithName(HttpHeaders.AUTHORIZATION).description("accessToken")
-                        ),
-                        CookieDocumentation.requestCookies(
-                                CookieDocumentation.cookieWithName("refreshToken").description("refreshToken")
-                        )
+                                requestHeaders(
+                                        headerWithName(HttpHeaders.AUTHORIZATION).description("accessToken")
+                                ),
+                                CookieDocumentation.requestCookies(
+                                        CookieDocumentation.cookieWithName("refreshToken").description("refreshToken")
+                                )
                         )
                 );
     }

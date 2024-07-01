@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class BookImage {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String imageUrl;

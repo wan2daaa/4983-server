@@ -16,13 +16,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 @DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 public class UsedBook extends BaseEntity {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -55,15 +57,18 @@ public class UsedBook extends BaseEntity {
     @ColumnDefault("false")
     private Boolean isCoverDamaged;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     private Member buyerMember;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Member sellerMember;
 
     @ColumnDefault("false")
     private Boolean isDeleted;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "usedBook", cascade = CascadeType.ALL)
     private List<BookImage> bookImageList = new ArrayList<>();
 

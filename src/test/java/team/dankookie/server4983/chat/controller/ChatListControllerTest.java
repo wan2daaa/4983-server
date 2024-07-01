@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
@@ -24,14 +25,11 @@ import team.dankookie.server4983.jwt.constants.TokenDuration;
 
 class ChatListControllerTest extends BaseControllerTest {
 
-    @MockBean
-    ChatService chatService;
-
     @Test
     void accessToken으로_유저의_채팅_리스트를_리턴한다() throws Exception {
         //given
-        ChatListResponse chatListResponse1 = ChatListResponse.of(1L, "사회과학통계방법", "안녕하세요", LocalDateTime.of(2023,9,22,12,30,12), false, "imageUrl");
-        ChatListResponse chatListResponse2 = ChatListResponse.of(2L, "컴퓨터공학개론", "테스트입니다.", LocalDateTime.of(2023,5,10,12,30,12), true, "imageUrl");
+        ChatListResponse chatListResponse1 = ChatListResponse.of(1L, "사회과학통계방법", "안녕하세요", LocalDateTime.of(2023, 9, 22, 12, 30, 12), false, "imageUrl");
+        ChatListResponse chatListResponse2 = ChatListResponse.of(2L, "컴퓨터공학개론", "테스트입니다.", LocalDateTime.of(2023, 5, 10, 12, 30, 12), true, "imageUrl");
 
         String accessToken = jwtTokenUtils.generateJwtToken("nickname", TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
 

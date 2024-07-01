@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 public class PhoneNumberDuplicateResponse {
     private final boolean phoneNumberDuplicate;
 
-    public static PhoneNumberDuplicateResponse of(boolean isDuplicate){
+    public static PhoneNumberDuplicateResponse of(boolean isDuplicate) {
         return new PhoneNumberDuplicateResponse(isDuplicate);
     }
 }

@@ -16,7 +16,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-class BookSalesDetailRepositoryTest extends BaseRepositoryTest{
+class BookSalesDetailRepositoryTest extends BaseRepositoryTest {
 
     @Autowired
     BookSalesDetailRepository bookSalesDetailRepository;
@@ -25,7 +25,7 @@ class BookSalesDetailRepositoryTest extends BaseRepositoryTest{
     MemberRepository memberRepository;
 
     @Test
-    void 판매중인_서적을_리턴한다(){
+    void 판매중인_서적을_리턴한다() {
         //given
         final boolean canBuy = true;
 
@@ -62,7 +62,7 @@ class BookSalesDetailRepositoryTest extends BaseRepositoryTest{
     }
 
     @Test
-    void 거래완료인_서적을_리턴한다(){
+    void 거래완료인_서적을_리턴한다() {
         //given
         final boolean canBuy = false;
 

@@ -17,8 +17,6 @@ import static org.springframework.restdocs.request.RequestDocumentation.queryPar
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 public class MemberNicknameDuplicateControllerTest extends BaseControllerTest {
-    @MockBean
-    MemberService memberService;
 
     @Test
     void 닉네임이_중복인경우_true를_리턴한다() throws Exception {

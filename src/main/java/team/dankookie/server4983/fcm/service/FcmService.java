@@ -24,29 +24,29 @@ public class FcmService {
 
         Member member = memberService.findMemberById(request.targetUserId());
 
-            if (member.getFirebaseToken() != null) {
-                Notification notification = Notification.builder()
-                        .setTitle(request.title())
-                        .setBody(request.body())
-                        // .setImage(requestDto.getImage())
-                        .build();
+        if (member.getFirebaseToken() != null) {
+            Notification notification = Notification.builder()
+                    .setTitle(request.title())
+                    .setBody(request.body())
+                    // .setImage(requestDto.getImage())
+                    .build();
 
-                Message message = Message.builder()
-                        .setToken(member.getFirebaseToken())
-                        .setNotification(notification)
-                        // .putAllData(requestDto.getData())
-                        .build();
+            Message message = Message.builder()
+                    .setToken(member.getFirebaseToken())
+                    .setNotification(notification)
+                    // .putAllData(requestDto.getData())
+                    .build();
 
-                try {
-                    firebaseMessaging.send(message);
-                } catch (FirebaseMessagingException e) {
-                    e.printStackTrace();
-                    throw new RuntimeException("알림 보내기를 실패하였습니다. targetUserId=" + request.targetUserId());
-                }
-            } else {
-                throw new RuntimeException("서버에 저장된 해당 유저의 FirebaseToken이 존재하지 않습니다. targetUserId="
-                    + request.targetUserId());
+            try {
+                firebaseMessaging.send(message);
+            } catch (FirebaseMessagingException e) {
+                e.printStackTrace();
+                throw new RuntimeException("알림 보내기를 실패하였습니다. targetUserId=" + request.targetUserId());
             }
+        } else {
+            throw new RuntimeException("서버에 저장된 해당 유저의 FirebaseToken이 존재하지 않습니다. targetUserId="
+                    + request.targetUserId());
+        }
     }
 
     @Async("messagingTaskExecutor")

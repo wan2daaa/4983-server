@@ -26,33 +26,34 @@ public class S3UploadService {
     public String s3Bucket = "https://4983-s3.s3.ap-northeast-2.amazonaws.com/";
 
     public S3Response saveFileWithUUID(MultipartFile multipartFile) {
-        try {
-            String originalFilename = multipartFile.getOriginalFilename();
-            ObjectMetadata metadata = setMetadata(multipartFile);
+//        try {
+        String originalFilename = multipartFile.getOriginalFilename();
+//            ObjectMetadata metadata = setMetadata(multipartFile);
 
-            String uuid = UUID.randomUUID().toString();
+        String uuid = UUID.randomUUID().toString();
 
-            saveImageWithUUID(multipartFile, metadata, uuid);
-            return S3Response.of(originalFilename, uuid, amazonS3.getUrl(bucket, uuid).toString());
-        } catch (IOException e) {
-            log.error("s3에 file 저장중 에러 발생", e);
-            throw new RuntimeException(e);
-        }
+//            saveImageWithUUID(multipartFile, metadata, uuid);
+        return S3Response.of(originalFilename, uuid, amazonS3.getUrl(bucket, uuid).toString());
+//        }
+//        catch (IOException e) {
+//            log.error("s3에 file 저장중 에러 발생", e);
+//            throw new RuntimeException(e);
+//        }
 
     }
 
     public void deleteFile(String image) {
-        amazonS3.deleteObject(bucket, image);
+//        amazonS3.deleteObject(bucket, image);
     }
 
-    private PutObjectResult saveImageWithUUID(MultipartFile multipartFile, ObjectMetadata metadata, String uuid) throws IOException {
-        return amazonS3.putObject(bucket, uuid, multipartFile.getInputStream(), metadata);
-    }
+//    private PutObjectResult saveImageWithUUID(MultipartFile multipartFile, ObjectMetadata metadata, String uuid) throws IOException {
+//        return amazonS3.putObject(bucket, uuid, multipartFile.getInputStream(), metadata);
+//    }
 
-    private static ObjectMetadata setMetadata(MultipartFile multipartFile) {
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentLength(multipartFile.getSize());
-        metadata.setContentType(multipartFile.getContentType());
-        return metadata;
-    }
+//    private static ObjectMetadata setMetadata(MultipartFile multipartFile) {
+//        ObjectMetadata metadata = new ObjectMetadata();
+//        metadata.setContentLength(multipartFile.getSize());
+//        metadata.setContentType(multipartFile.getContentType());
+//        return metadata;
+//    }
 }

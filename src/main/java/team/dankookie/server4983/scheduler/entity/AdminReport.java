@@ -27,7 +27,7 @@ public class AdminReport {
 
     private String reportType;
 
-    public static AdminReport createAdminReport(ChatRoom chatRoom , ReportType reportType) {
+    public static AdminReport createAdminReport(ChatRoom chatRoom, ReportType reportType) {
         return AdminReport.builder()
                 .chatRoom(chatRoom)
                 .message(reportType.getMessage())

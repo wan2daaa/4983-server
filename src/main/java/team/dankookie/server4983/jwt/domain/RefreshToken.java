@@ -13,7 +13,8 @@ import team.dankookie.server4983.member.domain.Member;
 @Entity
 public class RefreshToken {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

@@ -27,12 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class MemberPasswordControllerTest extends BaseControllerTest {
 
-    @MockBean
-    MemberService memberService;
-
-    @MockBean
-    CoolSmsService smsService;
-
     @Test
     void 학번과_휴대폰번호를_받으면_인증번호를_리턴한다() throws Exception {
         //given

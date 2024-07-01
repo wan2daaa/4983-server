@@ -1,6 +1,7 @@
 package team.dankookie.server4983.book.controller;
 
 import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,24 +21,24 @@ import team.dankookie.server4983.book.service.AdminLockerService;
 @RequestMapping("/api/v1/admin/locker")
 public class AdminLockerController {
 
-  private final AdminLockerService adminLockerService;
+    private final AdminLockerService adminLockerService;
 
-  @GetMapping
-  public List<AdminLockerListResponse> getLocker(@RequestParam(value = "") String searchKeyword,
-      @RequestParam Boolean isExists) {
+    @GetMapping
+    public List<AdminLockerListResponse> getLocker(@RequestParam(value = "") String searchKeyword,
+                                                   @RequestParam Boolean isExists) {
 
-    return adminLockerService.getLocker(searchKeyword, isExists);
-  }
+        return adminLockerService.getLocker(searchKeyword, isExists);
+    }
 
-  @PatchMapping("/{lockerNumber}/{isExists}")
-  public ResponseEntity<Void> updateLocker(
-      @PathVariable Integer lockerNumber,
-      @PathVariable Boolean isExists
-  ) {
+    @PatchMapping("/{lockerNumber}/{isExists}")
+    public ResponseEntity<Void> updateLocker(
+            @PathVariable Integer lockerNumber,
+            @PathVariable Boolean isExists
+    ) {
 
-    adminLockerService.updateLocker(lockerNumber, isExists);
+        adminLockerService.updateLocker(lockerNumber, isExists);
 
-    return ResponseEntity.ok().build();
-  }
+        return ResponseEntity.ok().build();
+    }
 
 }

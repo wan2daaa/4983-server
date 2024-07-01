@@ -50,32 +50,32 @@ class MemberRepositoryTest extends BaseRepositoryTest {
         assertThat(findMember).isPresent();
     }
 
-        @Test
-        void 닉네임이_중복인지_확인한다(){
-            //given
-            final String nickname = "nickname";
+    @Test
+    void 닉네임이_중복인지_확인한다() {
+        //given
+        final String nickname = "nickname";
 
-            Member member = MemberFixture.createMemberByNickname(nickname);
-            memberRepository.save(member);
+        Member member = MemberFixture.createMemberByNickname(nickname);
+        memberRepository.save(member);
 
-            //when
-            boolean duplicateNickname = memberRepository.existsMemberByNickname(nickname);
-            //then
-            assertThat(duplicateNickname).isTrue();
-        }
+        //when
+        boolean duplicateNickname = memberRepository.existsMemberByNickname(nickname);
+        //then
+        assertThat(duplicateNickname).isTrue();
+    }
 
-        @Test
-        void 프로필_이미지를_삭제한다(){
+    @Test
+    void 프로필_이미지를_삭제한다() {
 
-            //given
-            final String nickname = "nickname";
+        //given
+        final String nickname = "nickname";
 
-            Member member = MemberFixture.createMemberByNickname(nickname);
-            memberRepository.save(member);
-            MemberImage memberImage = MemberImage.builder()
-                    .member(member)
-                    .imageUrl(member.getImageUrl()).build();
-            memberImageRepository.save(memberImage);
-            memberImageRepository.deleteByMember(member);
-        }
+        Member member = MemberFixture.createMemberByNickname(nickname);
+        memberRepository.save(member);
+        MemberImage memberImage = MemberImage.builder()
+                .member(member)
+                .imageUrl(member.getImageUrl()).build();
+        memberImageRepository.save(memberImage);
+        memberImageRepository.deleteByMember(member);
+    }
 }

@@ -25,7 +25,7 @@ public class BookPurchaseDetailRepositoryTest extends BaseRepositoryTest {
     MemberRepository memberRepository;
 
     @Test
-    void 거래완료인_서적을_리턴한다(){
+    void 거래완료인_서적을_리턴한다() {
         //given
         final BookStatus bookStatus = BookStatus.SOLD;
 

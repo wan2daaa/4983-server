@@ -34,13 +34,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class MyPageBookPurchaseDetailListControllerTest extends BaseControllerTest {
 
-    @MockBean
-    private MyPageBookPurchaseDetailListService myPageBookPurchaseDetailListService;
-
     @Test
     void 구매내역_서적리스트를_리턴한다() throws Exception {
         BookStatus bookStatus = BookStatus.SOLD;
-        String accessToken = jwtTokenUtils.generateJwtToken("nickname",  TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
+        String accessToken = jwtTokenUtils.generateJwtToken("nickname", TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
 
         UsedBookListResponse usedBookListResponse1 = UsedBookListResponse.builder()
                 .usedBookId(1L)
@@ -98,10 +95,10 @@ class MyPageBookPurchaseDetailListControllerTest extends BaseControllerTest {
     }
 
     @Test
-    void 구매내역이_없는경우_빈리스트를_리턴한다() throws Exception{
+    void 구매내역이_없는경우_빈리스트를_리턴한다() throws Exception {
         //given
         BookStatus bookStatus = BookStatus.SOLD;
-        String accessToken = jwtTokenUtils.generateJwtToken("nickname",  TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
+        String accessToken = jwtTokenUtils.generateJwtToken("nickname", TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
 
         UsedBookListResponse usedBookListResponse = UsedBookListResponse.builder().build();
 
@@ -131,9 +128,9 @@ class MyPageBookPurchaseDetailListControllerTest extends BaseControllerTest {
     }
 
     @Test
-    void 회원이_존재하지_않는경우_에러를_리턴한다() throws Exception{
+    void 회원이_존재하지_않는경우_에러를_리턴한다() throws Exception {
         //given
-        String accessToken = jwtTokenUtils.generateJwtToken("nickname",  TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
+        String accessToken = jwtTokenUtils.generateJwtToken("nickname", TokenDuration.ACCESS_TOKEN_DURATION.getDuration());
         final BookStatus bookstatus = BookStatus.SOLD;
 
         when(myPageBookPurchaseDetailListService.getMyPageBookPurchaseDetailList(bookstatus, AccessToken.of(accessToken, "nickname")))

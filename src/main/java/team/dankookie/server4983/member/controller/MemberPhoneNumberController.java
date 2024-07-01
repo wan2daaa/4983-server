@@ -16,7 +16,7 @@ public class MemberPhoneNumberController {
     private final CoolSmsService smsService;
 
     @GetMapping("/certification-number")
-    public ResponseEntity<SmsCertificationNumber> getCertificationNumber(@RequestParam final String phoneNumber){
+    public ResponseEntity<SmsCertificationNumber> getCertificationNumber(@RequestParam final String phoneNumber) {
         SmsCertificationNumber certificationNumber = smsService.sendCertificationNumberToPhoneNumber(phoneNumber);
         return ResponseEntity.ok(certificationNumber);
     }

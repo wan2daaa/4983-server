@@ -18,13 +18,15 @@ import team.dankookie.server4983.member.dto.MemberProfileSaveRequest;
 import java.util.Collection;
 import java.util.List;
 
+@ToString
 @DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 public class Member extends BaseEntity implements UserDetails {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -84,10 +86,10 @@ public class Member extends BaseEntity implements UserDetails {
 
     @Builder
     public Member(Long id, String studentId, College college, Department department,
-        Integer yearOfAdmission, String nickname, String password, String phoneNumber,
-        String accountHolder, AccountBank accountBank, String accountNumber, String imageUrl,
-        Boolean marketingAgree, String firebaseToken, UserRole role, Boolean isWithdraw,
-        Boolean isBlocked) {
+                  Integer yearOfAdmission, String nickname, String password, String phoneNumber,
+                  String accountHolder, AccountBank accountBank, String accountNumber, String imageUrl,
+                  Boolean marketingAgree, String firebaseToken, UserRole role, Boolean isWithdraw,
+                  Boolean isBlocked) {
         this.id = id;
         this.studentId = studentId;
         this.college = college;
@@ -118,11 +120,12 @@ public class Member extends BaseEntity implements UserDetails {
         return this.isBlocked;
     }
 
-    public void updateMemberProfile(MemberProfileSaveRequest member){
+    public void updateMemberProfile(MemberProfileSaveRequest member) {
         this.nickname = member.nickname();
         this.accountBank = member.accountBank();
         this.accountNumber = member.accountNumber();
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

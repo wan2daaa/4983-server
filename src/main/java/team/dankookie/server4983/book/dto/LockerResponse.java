@@ -6,16 +6,16 @@ import lombok.Getter;
 @Getter
 public class LockerResponse {
 
-  private final Integer lockerNumber;
-  private final Boolean isExists;
+    private final Integer lockerNumber;
+    private final Boolean isExists;
 
-  @QueryProjection
-  public LockerResponse(Integer lockerNumber, Boolean isExists) {
-    this.lockerNumber = lockerNumber;
-    this.isExists = isExists;
-  }
+    @QueryProjection
+    public LockerResponse(Integer lockerNumber, Boolean isExists) {
+        this.lockerNumber = lockerNumber;
+        this.isExists = isExists;
+    }
 
-  public static LockerResponse of(Integer lockerNumber, Boolean isExists) {
-    return new LockerResponse(lockerNumber, isExists);
-  }
+    public static LockerResponse of(Integer lockerNumber, Boolean isExists) {
+        return new LockerResponse(lockerNumber, isExists);
+    }
 }
