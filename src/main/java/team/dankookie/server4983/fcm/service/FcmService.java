@@ -22,7 +22,7 @@ public class FcmService {
     @Async("messagingTaskExecutor")
     public void sendNotificationByToken(FcmBaseRequest request) {
 
-        Member member = memberService.findMemberById(request.targetUserId());
+        Member member = memberService.getMemberById(request.targetUserId());
 
         if (member.getFirebaseToken() != null) {
             Notification notification = Notification.builder()

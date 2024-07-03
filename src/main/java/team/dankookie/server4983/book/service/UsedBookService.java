@@ -37,7 +37,7 @@ public class UsedBookService {
                                                  UsedBookSaveRequest usedBookSaveRequest, AccessToken accessToken) {
 
         String nickname = getNicknameWithAccessToken(accessToken);
-        Member member = memberService.findMemberByNickname(nickname);
+        Member member = memberService.getMemberByNickname(nickname);
 
         UsedBook usedBook = usedBookRepository.save(usedBookSaveRequest.toEntity(member));
 
@@ -52,11 +52,11 @@ public class UsedBookService {
         return UsedBookSaveResponse.of(usedBook.getId());
     }
 
-    public UsedBookResponse findByUsedBookId(Long id, String nickname) {
+    public UsedBookResponse findByUsedBookIdMatchNickname(Long id, String nickname) {
 
         UsedBook usedBook = getUsedBookById(id);
 
-        Member requestMember = memberService.findMemberByNickname(nickname);
+        Member requestMember = memberService.getMemberByNickname(nickname);
 
         boolean isBookOwner = usedBook.getSellerMember().equals(requestMember);
 
@@ -90,7 +90,7 @@ public class UsedBookService {
 
         String nickname = getNicknameWithAccessToken(accessToken);
 
-        Member member = memberService.findMemberByNickname(nickname);
+        Member member = memberService.getMemberByNickname(nickname);
 
         boolean isUsedBookSavedByThisMember = usedBookRepository.existsUsedBookByIdAndSellerMember(id,
                 member);
@@ -124,7 +124,7 @@ public class UsedBookService {
     public UsedBookSaveResponse updateUsedBook(Long id, List<MultipartFile> multipartFileList,
                                                UsedBookSaveRequest usedBookSaveRequest, AccessToken accessToken) {
         String nickname = getNicknameWithAccessToken(accessToken);
-        Member member = memberService.findMemberByNickname(nickname);
+        Member member = memberService.getMemberByNickname(nickname);
 
         UsedBook usedBook = getUsedBookById(id);
 
@@ -151,7 +151,7 @@ public class UsedBookService {
         return jwtTokenUtils.getNickname(accessToken.value());
     }
 
-    private UsedBook getUsedBookById(Long id) {
+    public UsedBook getUsedBookById(Long id) {
         return usedBookRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("id와 일치하는 중고책이 존재하지 않습니다."));
     }

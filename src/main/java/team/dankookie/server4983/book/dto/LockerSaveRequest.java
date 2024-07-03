@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import team.dankookie.server4983.book.domain.Locker;
 import team.dankookie.server4983.chat.domain.ChatRoom;
-import team.dankookie.server4983.chat.dto.ChatRequest;
+import team.dankookie.server4983.chat.adapter.in.web.dto.ChatRequest;
 
 public record LockerSaveRequest(
         Integer lockerNumber,

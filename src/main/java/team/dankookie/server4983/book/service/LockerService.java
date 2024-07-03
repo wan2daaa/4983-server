@@ -1,8 +1,5 @@
 package team.dankookie.server4983.book.service;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,10 +7,13 @@ import team.dankookie.server4983.book.domain.Locker;
 import team.dankookie.server4983.book.dto.LockerResponse;
 import team.dankookie.server4983.book.dto.LockerSaveRequest;
 import team.dankookie.server4983.book.repository.locker.LockerRepository;
+import team.dankookie.server4983.chat.adapter.out.persistence.ChatRoomRepository;
+import team.dankookie.server4983.chat.application.service.ChatLogicHandler;
 import team.dankookie.server4983.chat.domain.ChatRoom;
-import team.dankookie.server4983.chat.handler.ChatLogicHandler;
-import team.dankookie.server4983.chat.repository.ChatRoomRepository;
 import team.dankookie.server4983.jwt.dto.AccessToken;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service

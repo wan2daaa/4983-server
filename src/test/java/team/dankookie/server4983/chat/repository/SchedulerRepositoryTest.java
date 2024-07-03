@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import team.dankookie.server4983.book.domain.UsedBook;
 import team.dankookie.server4983.book.repository.usedBook.UsedBookRepository;
 import team.dankookie.server4983.chat.domain.ChatRoom;
+import team.dankookie.server4983.chat.adapter.out.persistence.ChatRoomRepository;
 import team.dankookie.server4983.common.BaseRepositoryTest;
 import team.dankookie.server4983.member.domain.Member;
 import team.dankookie.server4983.member.fixture.MemberFixture;

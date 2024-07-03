@@ -5,12 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import team.dankookie.server4983.book.domain.UsedBook;
 import team.dankookie.server4983.common.exception.LoginFailedException;
 import team.dankookie.server4983.jwt.dto.AccessToken;
 import team.dankookie.server4983.jwt.util.JwtTokenUtils;
 import team.dankookie.server4983.member.domain.Member;
-import team.dankookie.server4983.member.domain.MemberImage;
 import team.dankookie.server4983.member.dto.*;
 import team.dankookie.server4983.member.repository.MemberRepository;
 import team.dankookie.server4983.member.repository.memberImage.MemberImageRepository;
@@ -27,12 +25,12 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenUtils jwtTokenUtils;
 
-    public Member findMemberById(Long id) {
+    public Member getMemberById(Long id) {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
     }
 
-    public Member findMemberByNickname(String nickname) {
+    public Member getMemberByNickname(String nickname) {
         return memberRepository.findByNickname(nickname)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
 
@@ -117,7 +115,7 @@ public class MemberService {
 
     public MemberCollegeAndDepartment findMemberCollegeAndDepartment(AccessToken accessToken) {
         String nickname = jwtTokenUtils.getNickname(accessToken.value());
-        Member member = findMemberByNickname(nickname);
+        Member member = getMemberByNickname(nickname);
 
         return MemberCollegeAndDepartment.of(member.getDepartment());
     }
@@ -125,7 +123,7 @@ public class MemberService {
     @Transactional
     public boolean checkMemberAndWithdraw(AccessToken accessToken) {
         String nickname = jwtTokenUtils.getNickname(accessToken.value());
-        Member member = findMemberByNickname(nickname);
+        Member member = getMemberByNickname(nickname);
         if (!member.getIsWithdraw()) {
             member.withdraw();
         }
@@ -152,7 +150,7 @@ public class MemberService {
     }
 
     public MemberMyPageResponse getMyPageMemberInfo(String nickname) {
-        Member member = findMemberByNickname(nickname);
+        Member member = getMemberByNickname(nickname);
 
         return MemberMyPageResponse.of(member.getImageUrl(), member.getNickname());
     }
@@ -166,18 +164,18 @@ public class MemberService {
 
         final String BASE_IMAGE = "https://4983-s3.s3.ap-northeast-2.amazonaws.com/baseImage.png";
 
-        Member member = findMemberByNickname(nickname);
+        Member member = getMemberByNickname(nickname);
         member.setImageUrl(BASE_IMAGE);
     }
 
     public MemberMyPageModifyResponse getMyPageMemberModifyInfo(String nickname) {
-        Member member = findMemberByNickname(nickname);
+        Member member = getMemberByNickname(nickname);
         return MemberMyPageModifyResponse.of(member.getImageUrl(), member.getNickname(), member.getAccountBank(), member.getAccountNumber(), member.getPhoneNumber());
     }
 
     @Transactional
     public boolean checkPhoneNumberDuplicate(String phoneNumber, String nickname) {
-        Member findMember = findMemberByNickname(nickname);
+        Member findMember = getMemberByNickname(nickname);
         return findMember.getPhoneNumber().equals(phoneNumber) || memberRepository.existsMemberByPhoneNumber(phoneNumber);
     }
 }

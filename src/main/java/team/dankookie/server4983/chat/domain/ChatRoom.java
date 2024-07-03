@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import team.dankookie.server4983.book.domain.Locker;
 import team.dankookie.server4983.book.domain.UsedBook;
 import team.dankookie.server4983.common.domain.BaseEntity;
@@ -20,7 +20,6 @@ import team.dankookie.server4983.member.domain.Member;
 @Getter
 @Entity
 @Builder
-@AllArgsConstructor
 public class ChatRoom extends BaseEntity {
 
     @Id
@@ -48,8 +47,41 @@ public class ChatRoom extends BaseEntity {
     @Builder.Default
     private int interactStep = 0; // ContentType 에 따른 1 ~ 5 단계
 
+    @ColumnDefault("false")
+    private boolean isFinished = false;
+
     @OneToOne(mappedBy = "chatRoom", cascade = CascadeType.ALL, orphanRemoval = true)
     private Locker locker;
+
+
+    private ChatRoom(Long chatRoomId, Member buyer, Member seller, List<BuyerChat> buyerChats, List<SellerChat> sellerChats, UsedBook usedBook, int interactStep, boolean isFinished, Locker locker) {
+        this.chatRoomId = chatRoomId;
+        this.buyer = buyer;
+        this.seller = seller;
+        this.buyerChats = buyerChats;
+        this.sellerChats = sellerChats;
+        this.usedBook = usedBook;
+        this.interactStep = interactStep;
+        this.isFinished = isFinished;
+        this.locker = locker;
+    }
+
+    private static ChatRoom createChatRoom(UsedBook usedBook, Member seller, Member buyer) {
+        return new ChatRoom(null, buyer, seller,List.of(), List.of(), usedBook, 0, false, null);
+    }
+
+    public static ChatRoom create(UsedBook usedBook, Member seller, Member buyer) {
+        ifBuyerAndSellerSameThenThrowException(seller, buyer);
+
+        return ChatRoom.createChatRoom(usedBook, seller, buyer);
+
+    }
+
+    private static void ifBuyerAndSellerSameThenThrowException(Member seller, Member buyer) {
+        if (seller.getId().equals(buyer.getId())) {
+            throw new IllegalArgumentException("판매자와 구매자가 같을 수 없습니다.");
+        }
+    }
 
     public static ChatRoom buildChatRoom(Member buyer, Member seller, UsedBook usedBook) {
         return ChatRoom.builder().buyer(buyer).seller(seller).usedBook(usedBook).build();

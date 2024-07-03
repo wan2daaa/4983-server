@@ -14,8 +14,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedDate;
 import team.dankookie.server4983.chat.constant.ContentType;
-import team.dankookie.server4983.chat.dto.ChatMessageResponse;
+import team.dankookie.server4983.chat.adapter.in.web.dto.ChatMessageResponse;
 
 @DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -41,8 +42,7 @@ public class SellerChat {
     private String message;
 
     @Column(updatable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    @CreationTimestamp
+    @CreatedDate
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)

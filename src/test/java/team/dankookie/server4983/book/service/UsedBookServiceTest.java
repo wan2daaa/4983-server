@@ -24,7 +24,6 @@ import team.dankookie.server4983.member.service.MemberService;
 import team.dankookie.server4983.s3.dto.S3Response;
 import team.dankookie.server4983.s3.service.S3UploadService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -79,7 +78,7 @@ class UsedBookServiceTest extends BaseServiceTest {
 
         when(jwtTokenUtils.getNickname(any()))
                 .thenReturn(nickname);
-        when(memberService.findMemberByNickname(nickname))
+        when(memberService.getMemberByNickname(nickname))
                 .thenReturn(member);
         when(usedBookRepository.save(any()))
                 .thenReturn(UsedBook.builder().id(usedBookId).build());
@@ -122,7 +121,7 @@ class UsedBookServiceTest extends BaseServiceTest {
                 .thenReturn(List.of(BookImage.builder().build()));
 
         //when
-        UsedBookResponse usedBookResponse = usedBookService.findByUsedBookId(usedBookId, nickname);
+        UsedBookResponse usedBookResponse = usedBookService.findByUsedBookIdMatchNickname(usedBookId, nickname);
 
         //then
         assertThat(usedBookResponse.getBookName()).isEqualTo(bookName);
@@ -139,7 +138,7 @@ class UsedBookServiceTest extends BaseServiceTest {
 
         when(jwtTokenUtils.getNickname(any()))
                 .thenReturn(nickname);
-        when(memberService.findMemberByNickname(nickname))
+        when(memberService.getMemberByNickname(nickname))
                 .thenReturn(member);
         when(usedBookRepository.existsUsedBookByIdAndSellerMember(usedBookId, member))
                 .thenReturn(true);
@@ -161,7 +160,7 @@ class UsedBookServiceTest extends BaseServiceTest {
 
         when(jwtTokenUtils.getNickname(any()))
                 .thenReturn(nickname);
-        when(memberService.findMemberByNickname(nickname))
+        when(memberService.getMemberByNickname(nickname))
                 .thenReturn(member);
         when(usedBookRepository.existsUsedBookByIdAndSellerMember(usedBookId, member))
                 .thenReturn(false);
