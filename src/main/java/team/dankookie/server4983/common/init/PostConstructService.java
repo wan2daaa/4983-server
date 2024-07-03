@@ -17,7 +17,7 @@ import team.dankookie.server4983.book.domain.UsedBook;
 import team.dankookie.server4983.book.repository.bookImage.BookImageRepository;
 import team.dankookie.server4983.book.repository.usedBook.UsedBookRepository;
 import team.dankookie.server4983.chat.domain.ChatRoom;
-import team.dankookie.server4983.chat.repository.ChatRoomRepository;
+import team.dankookie.server4983.chat.adapter.out.persistence.ChatRoomRepository;
 import team.dankookie.server4983.member.constant.AccountBank;
 import team.dankookie.server4983.member.constant.UserRole;
 import team.dankookie.server4983.member.domain.Member;

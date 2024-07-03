@@ -26,7 +26,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
@@ -38,7 +37,6 @@ import team.dankookie.server4983.book.constant.Department;
 import team.dankookie.server4983.book.dto.UsedBookResponse;
 import team.dankookie.server4983.book.dto.UsedBookSaveRequest;
 import team.dankookie.server4983.book.dto.UsedBookSaveResponse;
-import team.dankookie.server4983.book.service.UsedBookService;
 import team.dankookie.server4983.common.BaseControllerTest;
 import team.dankookie.server4983.jwt.constants.TokenDuration;
 import team.dankookie.server4983.jwt.dto.AccessToken;
@@ -148,7 +146,7 @@ class UsedBookControllerTest extends BaseControllerTest {
                 true
         );
 
-        when(usedBookService.findByUsedBookId(usedBookId, nickname))
+        when(usedBookService.findByUsedBookIdMatchNickname(usedBookId, nickname))
                 .thenReturn(usedBookResponse);
         //when
         ResultActions resultActions = mockMvc.perform(get(API + "/used-book/{id}", usedBookId)

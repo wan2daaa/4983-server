@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import team.dankookie.server4983.book.service.*;
-import team.dankookie.server4983.chat.service.ChatService;
+import team.dankookie.server4983.chat.application.service.ChatService;
 import team.dankookie.server4983.jwt.constants.TokenSecretKey;
 import team.dankookie.server4983.jwt.service.RefreshTokenService;
 import team.dankookie.server4983.jwt.util.JwtTokenUtils;
